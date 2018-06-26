@@ -28,4 +28,4 @@ Components Notes:
 - EN.json (questionnaire data set)
 
 
-
+Risk Test Score and DPP Search API: https://risktest-api-uat.diabetes.org
