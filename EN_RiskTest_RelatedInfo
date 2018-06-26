@@ -1,0 +1,706 @@
+<!-- LOW RESOURCES -->
+
+		<div id="lowcontent" class="lowresults">
+			
+			<div style="clear:both;height:25px;">&nbsp;</div>
+			<center>				
+				<p class="bolder" style="font-weight:700">Learn More about Diabetes and How to Prevent it</p>
+			</center>
+			<div style="clear:both;height:25px;">&nbsp;</div>
+			
+			<!--NAV-->
+			<div id="lowrisknav" class="row">
+				<div id="dbnav" class="col-md-3 text-center infonavbox active">
+						<div class="aicon"><img src="../ws/risktest/img/relatedinfos/diabetes-basics-icon.png" /></div>
+					<a class="infonavbtn" onClick="openContent('diabetesbasic');">Diabetes Basics</a>
+				</div>
+				<div id="sthlnav" class="col-md-3 text-center infonavbox">
+					<div class="aicon"><img src="../ws/risktest/img/relatedinfos/stairs.png" /></div>
+					<a class="infonavbtn" onClick="openContent('sthl');">Steps Toward a Healthy Life</a>
+				</div>
+				<div id="sylonav" class="col-md-3 text-center infonavbox">
+				<div class="aicon"><img src="../ws/risktest/img/relatedinfos/heart.png" /></div>
+					<a class="infonavbtn" onClick="openContent('helpothers');">Help Others</a>
+				</div>
+				<div id="ginav" class="col-md-3 text-center infonavbox">
+				<div class="aicon"><img src="../ws/risktest/img/relatedinfos/hands.png" /></div>
+					<a class="infonavbtn" onClick="openContent('getinvolved');">Get Involved</a>
+				</div>
+			</div>
+			<div style="clear:both;height:25px;">&nbsp;</div>
+			
+			
+			
+			<div id="diabetesbasic" class="subsectioncontent">
+			<div style="clear:both;height:20px;">&nbsp;</div>
+			    <div class="introboxes">
+				<p class="resultTextBig">Diabetes Basics</p>
+				<p>In the U.S., 1 in 3 adults has prediabetes and is at risk for type 2 diabetes, yet nearly 90% don&#8217;t know they have it. Learning about diabetes and how to prevent or delay it is the first step toward living a longer, healthier life. The ADA can help you continue down a path toward health and wellbeing.</p>
+				</div>
+				<div style="clear:both;height:20px;">&nbsp;</div>
+				<p><strong>RELATED RESOURCES</strong></p>
+				<div class="row">
+					<div class="col-md-4">
+						<div class="rrboxes equalheight">
+						<div class="rrboxestxtcontent">
+						<p><a class="bolder" href="http://www.diabetes.org/diabetes-basics/type-2/facts-about-type-2.html" target="_blank">What Is Type 2 Diabetes?</a></p>
+					<p>Type 2 diabetes is the most common form of diabetes. Knowing your risk means knowing what diabetes is and how to prevent it.</p>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="rrboxes equalheight">
+<div class="rrboxesimg"><img class="rrboxsqimg" src="../ws/risktest/img/relatedinfos/Risk_Test_Image_What_Is_Prediabetes_230x180px.jpg" alt="what is prediabetes?" /></div>
+					<div class="rrboxestxtcontent text-center">
+						<p><a class="bolder" href="http://www.diabetes.org/are-you-at-risk/prediabetes/" target="_blank">What is Prediabetes?</a></p>
+					<!--<p>Before people develop type 2 diabetes, they almost always have "prediabetes.&#8221; Yet with exercise and a change in diet, you can delay or prevent diabetes.</p>-->
+							</div>
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="rrboxes equalheight">
+						<div class="rrboxestxtcontent">
+						<p><a class="bolder" href="http://www.diabetes.org/diabetes-basics/genetics-of-diabetes.html" target="_blank">Genetics and Diabetes</a></p>
+					<p>Genetic makeup plays an important but complicated role in diabetes.</p>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+				<div style="clear:both;height:5px;">&nbsp;</div>
+				<div class="row">
+					<div class="col-md-4">
+						<div class="rrboxes equalheight">
+						<div class="rrboxesimg"><img class="rrboxsqimg" src="../ws/risktest/img/relatedinfos/Risk_Test_Image_Dispelling_Myths_230x180px.jpg" alt="Dispelling the Myth" /></div>
+						<div class="rrboxestxtcontent text-center">
+						<p><a class="bolder" href="http://www.diabetes.org/diabetes-basics/myths/" target="_blank">Dispelling the Myths</a></p>
+					<!--<p>There are myths about diabetes that are all too commonly reported as fact. Find out what's fact and what's fiction.</p>-->
+						</div>
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="rrboxes equalheight">
+						<div class="rrboxestxtcontent">
+						<p><a class="bolder" href="http://www.diabetes.org/diabetes-basics/statistics/" target="_blank">Stats About Diabetes</a></p>
+					<p>Know the numbers about diabetes &ndash; 1.5 million Americans are told they have diabetes  each year.</p>
+						</div>
+						</div>
+					</div>
+					
+					<div class="col-md-4">
+						<div class="rrboxes equalheight">
+						<div class="rrboxestxtcontent">
+						<p><a class="bolder" href="http://www.diabetes.org/diabetes-basics/common-terms/" target="_blank">Common Terms</a></p>
+					<p>There are many acronyms and medical terms used when talking about diabetes. Let us help you understand what they mean.</p>
+						</div>
+						</div>
+					</div>
+				</div>
+				<div class="text-right"><a onClick="scrollToTarget('lowrisknav');" style="font-size: 14pt;">Back to Menu</a></div>
+				<div style="clear:both;height:50px;">&nbsp;</div>
+			</div>
+			
+			
+			<div id="sthl" class="inithide subsectioncontent">
+			<div style="clear:both;height:20px;">&nbsp;</div>
+			    <div class="introboxes">
+				<p class="resultTextBig">Steps Toward a Healthy Life</p>
+				<p>Your risk for diabetes is low  and we want to help you keep it that way. It&#8217;s important to maintain a healthy weight, get regular exercise and reduce stress to delay or prevent type 2 diabetes.</p>
+				</div>
+				<div style="clear:both;height:20px;">&nbsp;</div>
+				
+				<!--<div class="row rrboxes featuredrow" style="padding:0;">
+					<div class="col-md-9" style="padding:20px;">
+						<p><a class="bolder" href="https://diabetesfoodhub.org/" target="_blank">Diabetes Food Hub</a></p>
+						<p>A new digital cooking and recipes destination filled with healthy meals for you and your family.</p>
+					</div>
+					<div class="col-md-3 hidden-xs hidden-sm text-right" style="padding:0;">
+						<img src="../ws/risktest/img/relatedinfos/Risk_Test_Image_Diabetes_Food_Hub_130x240px.jpg" class="sideImgRRBoxes" alt="Diabetes Food Hub" />
+					</div>
+				</div>
+				<div style="clear:both;height:5px;">&nbsp;</div>-->
+				
+				<p><strong>RELATED RESOURCES</strong></p>
+				<div class="row">
+					<!--<div class="col-md-4">
+						<div class="rrboxes equalheight">
+						<div class="rrboxestxtcontent">
+						<p><a class="bolder" href="http://www.diabetes.org/food-and-fitness/food/what-can-i-eat/making-healthy-food-choices/" target="_blank">Making Healthy Food Choices</a></p>
+					<p>Knowing what to eat can be confusing. Learn the best and worst choices for each food group.</p>
+							</div>
+						</div>
+					</div>-->
+					<div class="col-md-4">
+						<div class="rrboxes equalheight">
+						<div class="rrboxesimg"><img class="rrboxsqimg" src="../ws/risktest/img/relatedinfos/Risk_Test_Image_DFH_230x180px.jpg" alt="Diabetes Food Hub" /></div>
+						<div class="rrboxestxtcontent text-center">
+						<p><a class="bolder" href="https://diabetesfoodhub.org/" target="_blank">Diabetes Food Hub</a></p>
+					<!--<p>Knowing what to eat can be confusing. Learn the best and worst choices for each food group.</p>-->
+							</div>
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="rrboxes equalheight">
+						<div class="rrboxestxtcontent">
+						<p><a class="bolder" href="http://www.diabetesforecast.org/2017/jul-aug/active-lifestyle-guide-2017.html" target="_blank">Active Lifestyle Guide</a></p>
+					<p>Our <em>Diabetes Forecast</em> magazine offers you a guide for inspiration, tips and gear for your healthy get-up-and-go moments.</p>
+						</div>
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="rrboxes equalheight">
+						<div class="rrboxestxtcontent"><p><a class="bolder" href="http://www.diabetesforecast.org/2012/dec/10-stress-reducing-tips.html" target="_blank">10 Stress-Reducing Tips</a></p>
+					<p>We all experience stress in different ways. These 10 tips from <em>Diabetes Forecast</em> magazine can help you improve stress management.</p></div>
+						</div>
+					</div>
+				</div>
+				<div style="clear:both;height:5px;">&nbsp;</div>
+				
+				<div class="row">
+					<div class="col-md-4">
+						<div class="rrboxes equalheight">
+						<div class="rrboxestxtcontent"><p><a class="bolder" href="https://www.chefd.com/collections/ada?view=meal-profile" target="_blank">Meal Planning Made Easy</a></p>
+					<p>The ADA has joined Chef&#8217;d, a meal delivery service, to bring you easy-to-make meals at home with the ingredients you need to eat healthy.</p></div>
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="rrboxes equalheight">
+						<div class="rrboxesimg"><img class="rrboxsqimg" src="../ws/risktest/img/relatedinfos/Risk_Test_Image_Get_Moving_for_Good_230x180px.jpg" alt="Get Moving For Good" /></div>
+						<div class="rrboxestxtcontent text-center"><p><a class="bolder" href="http://www.diabetes.org/tour" target="_blank">Get Moving for Good!</a></p>
+					<!--<p>Participate in a Step Out Walk to Stop Diabetes or a Tour de Cure cycling fundraising event.</p>-->
+					</div>
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="rrboxes equalheight">
+						<div class="rrboxestxtcontent"><p><a class="bolder" href="http://www.diabetesforecast.org/landing-pages/dt-page.html?food=wcie-away-from-home" target="_blank">Making Healthy Food Choices</a></p>
+					<p>Knowing what to eat can be confusing. Learn the best and worst choices for each food group.</p></div>
+						</div>
+					</div>
+				</div>
+				<div class="text-right"><a onClick="scrollToTarget('lowrisknav');" style="font-size: 14pt;">Back to Menu</a></div>
+				<div style="clear:both;height:50px;">&nbsp;</div>
+			</div>
+			
+			<div id="helpothers" class="inithide subsectioncontent">
+			<div style="clear:both;height:20px;">&nbsp;</div>
+			    <div class="introboxes">
+				<p class="resultTextBig">Help Others</p>
+				<p>While you may not be at high risk for diabetes, there is likely someone in your life who is &ndash; and they need your support. Whether you are a family member, friend, or just an acquaintance, there are things you can do to help them lead healthy lives and prevent diabetes.</p>
+				</div>
+				<div style="clear:both;height:20px;">&nbsp;</div>
+				<p><strong>RELATED RESOURCES</strong></p>
+				<div class="row">
+					<div class="col-md-4">
+						<div class="rrboxes equalheight">
+						<div class="rrboxestxtcontent">
+						<p><a class="bolder" onClick="scrollToTarget('shareboxlow');">Share the Risk Test</a></p>
+					<p>Encourage others to learn their risk for type 2 diabetes and prediabetes.</p>
+							</div></div>
+					</div>
+					<div class="col-md-4">
+						<div class="rrboxes equalheight"><div class="rrboxestxtcontent">
+						<p><a class="bolder" href="http://www.diabetesforecast.org/2013/jul/12-tips-on-how-to-give-support.html" target="_blank">12 Tips on How to Give Support</a></p>
+					<p>You want to be helpful, but you don&#8217;t want to overstep your bounds. Here are some tips to help you navigate supporting others.</p></div>
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="rrboxes equalheight">
+						<div class="rrboxesimg"><img class="rrboxsqimg" src="../ws/risktest/img/relatedinfos/Risk_Test_Image_Know_the_Symptoms_230x180px.jpg" alt="Know the Symptoms of Diabetes" /></div>
+						<div class="rrboxestxtcontent text-center">
+						<p><a class="bolder" href="http://www.diabetes.org/diabetes-basics/symptoms/" target="_blank">Know the Symptoms of Diabetes</a></p>
+					<!--<p>Some people with type 2 diabetes have symptoms so mild that they go unnoticed. Know the signs and help them prevent diabetes before it starts.</p>-->
+							</div>
+						</div>
+						
+					</div>
+				</div>
+				<div style="clear:both;height:5px;">&nbsp;</div>
+				<div class="row">
+					<div class="col-md-4">
+						<div class="rrboxes equalheight"><div class="rrboxestxtcontent">
+						<p><a class="bolder" href="http://www.diabetes.org/in-my-community/wellness-lives-here/stop-d-at-work/organizational-resources.html" target="_blank">Create a Diabetes-Friendly Work Place</a></p>
+					<p>Employers can implement common sense solutions to ensure that people with prediabetes and diabetes have the opportunity to succeed.</p>
+							</div></div>
+					</div>
+					<div class="col-md-4">
+						<div class="rrboxes equalheight">
+						<div class="rrboxesimg"><img class="rrboxsqimg" src="../ws/risktest/img/relatedinfos/Risk_Test_Image_Share_Risk_Test_230x180px.jpg" alt="8 Tips for Caregiver" /></div>
+						<div class="rrboxestxtcontent text-center">
+						<p><a class="bolder" href="http://www.diabetes.org/living-with-diabetes/recently-diagnosed/8-tips-for-caregivers.html" target="_blank">8 Tips for Caregivers</a></p>
+					<!--<p>A diabetes diagnosis can be overwhelming. Help your loved ones enjoy the healthiest lives possible.</p>-->
+							</div></div>
+					</div>
+					<div class="col-md-4">
+						<div class="rrboxes equalheight"><div class="rrboxestxtcontent">
+						<p><a class="bolder" href="http://www.diabetes.org/in-my-community/diabetes-camp/camp-powerup.html" target="_blank">Camp PowerUp</a></p>
+					<p>Camp PowerUp blends fun activities and wellness education to help children at high risk of developing type 2 diabetes learn valuable skills they need to live a full and healthy life.</p>
+							</div></div>
+					</div>
+				</div>
+				<div class="text-right"><a onClick="scrollToTarget('lowrisknav');" style="font-size: 14pt;">Back to Menu</a></div>
+				<div style="clear:both;height:50px;">&nbsp;</div>
+			</div>
+			
+			<div id="getinvolved" class="inithide subsectioncontent">
+			<div style="clear:both;height:20px;">&nbsp;</div>
+			    <div class="introboxes">
+				<p class="resultTextBig">Get Involved</p>
+				<p>Every 21 seconds, another individual is diagnosed with diabetes in the U.S. Now is your chance to help. We must take bold action to end the diabetes epidemic. Join us in our mission to prevent and cure diabetes, and to improve the lives of all people affected by diabetes.</p>
+				</div>
+				<div style="clear:both;height:20px;">&nbsp;</div>
+				
+							
+				<p><strong>RELATED RESOURCES</strong></p>
+				<div class="row">
+					<div class="col-md-4">
+						<div class="rrboxes equalheight"><div class="rrboxestxtcontent">
+						<p><a class="bolder" href="http://www.diabetes.org/about-us/contact-us/" target="_blank">Contact Us Directly</a></p>
+					<p>Our Center for Information (1-800-DIABETES) is your guide to information on diabetes, ADA programs and events, and how to get involved.</p>
+							</div></div>
+					</div>
+					<div class="col-md-4">
+						<div class="rrboxes equalheight">
+						<div class="rrboxesimg"><img class="rrboxsqimg" src="../ws/risktest/img/relatedinfos/Risk_Test_Image_Donate_230x180px.jpg" alt="Donate Today" /></div>
+						<div class="rrboxestxtcontent text-center">
+						<p><a class="bolder" href="https://donations.diabetes.org/site/donation2?df_id=19705&mfc_pref=t&19705.donation=form1" target="_blank">Donate Today</a></p>
+						<!--<p>Every day, 4,110 people are diagnosed with diabetes. With your support, we can continue to fight to end the diabetes epidemic.</p>-->
+						</div>
+						</div>
+					</div>
+					
+					<div class="col-md-4">
+						<div class="rrboxes equalheight"><div class="rrboxestxtcontent">
+						<p><a class="bolder" href="http://diabetes.org/in-my-community/local-offices/" target="_blank">Find Your Local Office</a></p>
+					<p>The ADA has programming across the country. Reaching out to your local office is one way to get involved.</p>
+							</div></div>
+					</div>
+				</div>
+				<div style="clear:both;height:5px;">&nbsp;</div>
+				
+				<div class="row">
+					<div class="col-md-8">
+						<div class="rrboxes equalheight">
+						<div class="rrboxestxtcontent col-md-9" style="height:243px;">
+						<p><a class="bolder" href="https://diabetes.org/advocacy/take-action/" target="_blank">Become an Advocate</a></p>
+					<p>Help find a cure for diabetes, improve access to health care, and protect the rights of people with the disease.</p>
+							</div>
+							<div class="col-md-3 hidden-xs hidden-sm text-right" style="height:243px;padding:0;">
+								<img style="height: 100%;border-top-right-radius: 12px;" src="../ws/risktest/img/relatedinfos/Risk_Test_Image_Become-an-Advocate_130x240px.jpg" alt="Become an Advocate" />
+							</div>
+							<div style="clear:both;height:1px;">&nbsp;</div>
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="rrboxes equalheight"><div class="rrboxestxtcontent">
+						<p><a class="bolder" href="http://www.shopdiabetes.org" target="_blank">Shop Diabetes</a></p>
+					<p>Purchase items that help support diabetes research, education, and advocacy.</p>
+							</div></div>
+					</div>
+					<!--<div class="col-md-4">
+						<div class="rrboxes equalheight"><div class="rrboxestxtcontent">
+						<p><a class="bolder" href="http://www.diabetes.org/research-and-practice/we-are-research-leaders/" target="_blank">Learn More about ADA Funded Research</a></p>
+					<p>Since 1952, ADA has invested more than $807 million in research projects to change the face of how diabetes is treated.</p>
+							</div></div>
+					</div>-->
+				</div>
+				<div class="text-right"><a onClick="scrollToTarget('lowrisknav');" style="font-size: 14pt;">Back to Menu</a></div>
+				<div style="clear:both;height:50px;">&nbsp;</div>
+			</div>
+			
+			
+			
+		</div>	
+
+<!-- END LOW RESOURCES -->
+
+
+<!-- HIGH RESOURCES -->
+
+		<div id="highcontent1" class="highresults">
+			
+			<div style="clear:both;height:25px;">&nbsp;</div>
+			<center>				
+				<p class="bolder" style="font-weight:700">Tips and Resources to Live a Healthy Life</p>
+			</center>
+			<div style="clear:both;height:25px;">&nbsp;</div>
+			
+			<!--NAV-->
+			<div id="highrisknav" class="row">
+				<div id="rdnav" class="col-md-3 text-center infonavbox active inithide type2related">
+				<div class="aicon"><img src="../ws/risktest/img/relatedinfos/dpp-icon.png" /></div>
+					<a class="infonavbtn" onClick="openContent('recentlydiagnosed');">Recently Diagnosed?</a>	
+				</div>
+				<div id="dppnav" class="col-md-3 text-center infonavbox active prediabetesrelated">
+				<div class="aicon"><img src="../ws/risktest/img/relatedinfos/dpp-icon.png" /></div>
+					<a class="infonavbtn" onClick="openContent('dpprogram');">Diabetes Prevention Program</a>
+				</div>
+				<div id="dbhnav" class="col-md-3 text-center infonavbox">
+				<div class="aicon"><img src="../ws/risktest/img/relatedinfos/diabetes-basics-icon.png" /></div>
+					<a class="infonavbtn" onClick="openContent('diabetesbasic2');">Diabetes Basics</a>
+				</div>
+				<div id="henav" class="col-md-3 text-center infonavbox">
+				<div class="aicon"><img src="../ws/risktest/img/relatedinfos/healthy-eating-icon.png" /></div>
+					<a class="infonavbtn" onClick="openContent('healthyeating');">Healthy Eating</a>
+				</div>
+				<div id="penav" class="col-md-3 text-center infonavbox">
+				<div class="aicon"><img src="../ws/risktest/img/relatedinfos/pe-icon.png" /></div>
+					<a class="infonavbtn" onClick="openContent('physicalexercise');">Physical Exercise</a>
+				</div>
+			</div>
+			<div style="clear:both;height:25px;">&nbsp;</div>
+			
+			<div id="recentlydiagnosed" class="subsectioncontent inithide">
+			<div style="clear:both;height:20px;">&nbsp;</div>
+			    <div class="introboxes">
+				<p class="resultTextBig">Recently Diagnosed?</p>
+				<p>It's not easy to hear you have diabetes. But for millions of Americans, learning about their diabetes is the first step toward living a longer, healthier life. Here's what you need to get started on the path toward improved health and wellbeing.</p>
+				</div>
+				<div style="clear:both;height:20px;">&nbsp;</div>
+				
+				
+				
+				<p><strong>RELATED RESOURCES</strong></p>
+				<div class="row">
+					<div class="col-md-4">
+						<div class="rrboxes equalheight"><div class="rrboxestxtcontent">
+						<p><a class="bolder" href="http://www.diabetes.org/living-with-diabetes/recently-diagnosed/where-do-i-begin/checking-blood-glucose.html" target="_blank">Checking Blood Glucose</a></p>
+					<p>Checking your blood glucose is one way you can know how food, activity and medicine affect your blood glucose.</p>
+							</div></div>
+					</div>
+					<div class="col-md-8">
+					  <div class="rrboxes equalheight">
+						<div class="rrboxestxtcontent col-md-7" style="height:243px;">
+						  <p><a class="bolder" href="https://donations.diabetes.org/site/SPageServer/?pagename=LWT2D_English" target="_blank">Living with Type 2 Diabetes</a></p>
+						  <p>Enroll in the free Living With Type 2 Diabetes program to get information and support.</p>
+						</div>
+						<div class="col-md-5 hidden-xs hidden-sm text-right" style="height:243px;padding:0;"> <img src="../ws/risktest/img/relatedinfos/LWT2D_250x240px.jpg" style="height: 100%;border-top-right-radius: 12px;" alt="Living with Type 2 Diabetes" /></div>
+						<div style="clear:both;height:1px;">&nbsp;</div>
+					  </div>
+					</div>
+					
+				</div>
+				<div style="clear:both;height:5px;">&nbsp;</div>
+				<div class="row">
+					<div class="col-md-4">
+						<div class="rrboxes equalheight"><div class="rrboxestxtcontent">
+						<p><a class="bolder" href="http://www.diabetes.org/living-with-diabetes/recently-diagnosed/where-do-i-begin/start-here.html" target="_blank">Where Do I Begin?</a></p>
+					<p>Diabetes is a journey. There&#8217;s a lot to learn, but you don&#8217;t have to do it alone. The ADA is ready to help you every step of the way.</p>
+						</div></div>
+					</div>
+					<div class="col-md-4">
+						<div class="rrboxes equalheight"><div class="rrboxestxtcontent">
+						<p><a class="bolder" href="https://www.cdc.gov/diabetes/prevention/prediabetes-type2/preventing.html" target="_blank">Getting Support</a></p>
+					<p>Your family and friends can be a great source of support because they care about you.</p>
+							</div></div>
+					</div>
+					<div class="col-md-4">
+						<div class="rrboxes equalheight"><div class="rrboxestxtcontent">
+						<p><a class="bolder" href="http://www.diabetes.org/living-with-diabetes/treatment-and-care/whos-on-your-health-care-team/" target="_blank">Your Care Team</a></p>
+					<p>Finding the right team of skilled health care professionals will help you manage your diabetes.</p>
+							</div></div>
+					</div>
+				</div>
+				
+				
+				
+				<div class="text-right"><a onClick="scrollToTarget('highrisknav');" style="font-size: 14pt;">Back to Menu</a></div>
+				<div style="clear:both;height:50px;">&nbsp;</div>
+			</div>
+			
+			
+			
+			<div id="dpprogram" class="subsectioncontent">
+			<div style="clear:both;height:20px;">&nbsp;</div>
+			    <div class="introboxes">
+				<p class="resultTextBig">Diabetes Prevention Program</p>
+				<p>Seeing your doctor is the critical next step to determining if you have prediabetes or diabetes. If you find out you have prediabetes, we recommend you join a CDC-led National Diabetes Prevention Program. The program offers scientifically proven and effective lifestyle change program that can help you prevent or delay type 2 diabetes. </p>
+				</div>
+				<div style="clear:both;height:20px;">&nbsp;</div>
+				
+				
+				
+				<p><strong>RELATED RESOURCES</strong></p>
+				<div class="row">
+					
+					<!--<div class="col-md-8">
+					  <div class="rrboxes equalheight">
+						<div class="rrboxestxtcontent col-md-9" style="height:243px;">
+						  <p><a class="bolder" href="https://www.cdc.gov/diabetes/prevention/lifestyle-program/experience/index.html" target="_blank">What is a Diabetes Prevention Program?</a></p>
+						  <p>The program helps show you how small changes around eating, activity and stress make better food choices, be more physically active, and find helpful ways to cope with stress. </p>
+						</div>
+						<div class="col-md-3 hidden-xs hidden-sm text-right" style="height:243px;padding:0;"> <img src="../ws/risktest/img/relatedinfos/Risk_Test_Image_What_is_DPP_130x240px.png" style="height: 100%;border-top-right-radius: 12px;" alt="Living with Type 2 Diabetes" /></div>
+						<div style="clear:both;height:1px;">&nbsp;</div>
+					  </div>
+					</div>-->
+					<div class="col-md-4">
+						<div class="rrboxes equalheight">
+						<div class="rrboxesimg"><img class="rrboxsqimg" src="../ws/risktest/img/relatedinfos/Risk_Test_Image_What_is_DPP_230x180px.jpg" alt="What is DPP" /></div>
+						<div class="rrboxestxtcontent text-center">
+						<p class="bolder" style="font-weight:700"><a class="bolder" href="https://www.cdc.gov/diabetes/prevention/lifestyle-program/experience/index.html" target="_blank">What is a Diabetes Prevention Program? </a></p>
+					<!--<p>The program helps show you how small changes around eating, activity and stress make better food choices, be more physically active, and find helpful ways to cope with stress.</p>-->
+							</div></div>
+					</div>
+					
+					<div class="col-md-4">
+						<div class="rrboxes equalheight"><div class="rrboxestxtcontent">
+						<p class="bolder" style="font-weight:700"><a class="bolder" href="https://www.cdc.gov/diabetes/prevention/prediabetes-type2/preventing.html" target="_blank">How effective is the program?</a></p>
+					<p>A CDC-recognized lifestyle change program is a proven way to prevent or delay type 2 diabetes</p>
+						</div></div>
+					</div>
+					<div class="col-md-4">
+						<div class="rrboxes equalheight"><div class="rrboxestxtcontent">
+						<p class="bolder" style="font-weight:700"><!--<a class="bolder" href="http://www.diabetes.org/living-with-diabetes/treatment-and-care/whos-on-your-health-care-team/" target="_blank">-->Is the program covered by insurance? <!--</a>--></p>
+					<p>Costs for the program are often covered by insurance providers or employers. Check with employer or insurance providers to see if the program is a covered benefit for you.</p>
+							</div></div>
+					</div>
+				</div>
+				<div style="clear:both;height:5px;">&nbsp;</div>
+				<div class="row" style="display:none;">
+					<div class="col-md-4">
+					<!--	<div class="rrboxes equalheight"><div class="rrboxestxtcontent">
+						<p class="bolder" style="font-weight:700"><a class="bolder" href="http://www.diabetes.org/living-with-diabetes/treatment-and-care/whos-on-your-health-care-team/" target="_blank">Is the program covered by insurance? </a></p>
+					<p>Costs for the program are often covered by insurance providers or employers. Check with employer or insurance providers to see if the program is a covered benefit for you.</p>
+							</div></div>-->
+					</div>
+					<div class="col-md-4">
+						<!--<div class="rrboxes equalheight"><div class="rrboxestxtcontent">
+						<p class="bolder" style="font-weight:700"><a class="bolder" href=": https://www.cdc.gov/diabetes/prevention/prediabetes-type2/preventing.html" target="_blank">How effective is the program?</a></p>
+					<p>A CDC-recognized lifestyle change program is a proven way to prevent or delay type 2 diabetes</p>
+						</div></div>-->
+					</div>
+					<div class="col-md-4">
+						<!--<div class="rrboxes equalheight">
+						<div class="rrboxesimg"><img class="rrboxsqimg" src="../ws/risktest/img/relatedinfos/Risk_Test_Image_What_Is_Prediabetes_230x180px.jpg" alt="What is Prediabetes?" /></div>
+						<div class="rrboxestxtcontent text-center">
+						<p><a class="bolder" href="http://www.diabetes.org/are-you-at-risk/prediabetes/" target="_blank">What is Prediabetes?</a></p>-->
+					<!--<p>Your family and friends can be a great source of support because they care about you.</p>-->
+					<!--		</div></div>-->
+					</div> 
+					
+				</div>
+				
+				
+				
+				<div class="text-right"><a onClick="scrollToTarget('highrisknav');" style="font-size: 14pt;">Back to Menu</a></div>
+				<div style="clear:both;height:50px;">&nbsp;</div>
+			</div>
+			
+			
+			
+			
+			<div id="diabetesbasic2" class="inithide subsectioncontent">
+			<div style="clear:both;height:20px;"> &nbsp;</div>
+			    <div class="introboxes">
+				<p class="resultTextBig">Diabetes Basics</p>
+				<p>Over 30 million people have diabetes in the U.S. It&#8217;s important to know the basics about diabetes.</p>
+				</div>
+				<div style="clear:both;height:20px;">&nbsp;</div>
+				<p><strong>RELATED RESOURCES</strong></p>
+				<div class="row">
+					<div class="col-md-4">
+						<div class="rrboxes equalheight"><div class="rrboxestxtcontent">
+						<p><a class="bolder" href="http://www.diabetes.org/diabetes-basics/type-2/facts-about-type-2.html" target="_blank">What Is Type 2 Diabetes?</a></p>
+					<p>Type 2 diabetes is the most common form of diabetes. Knowing your risk means knowing what diabetes is and how to prevent it.</p>
+							</div></div>
+					</div>
+					<div class="col-md-4">
+						<div class="rrboxes equalheight"><div class="rrboxestxtcontent">
+						<p><a class="bolder" href="http://www.diabetes.org/diabetes-basics/statistics/" target="_blank">Stats About Diabetes</a></p>
+					<p>Know the numbers about diabetes &ndash; 1.5 million Americans are told they have diabetes  each year.</p>
+							</div></div>
+					</div>
+					<div class="col-md-4">
+						<div class="rrboxes equalheight"><div class="rrboxestxtcontent">
+						<p><a class="bolder" href="http://www.diabetes.org/diabetes-basics/genetics-of-diabetes.html" target="_blank">Genetics and Diabetes</a></p>
+					<p>Genetic makeup plays an important but complicated role in diabetes.</p>
+							</div></div>
+					</div>
+				</div>
+				
+				<div style="clear:both;height:5px;">&nbsp;</div>
+				<div class="row">
+					<!--<div class="col-md-8">
+					  <div class="rrboxes equalheight">
+						<div class="rrboxestxtcontent col-md-9" style="height:243px;">
+						  <p><a class="bolder" href="http://www.diabetes.org/diabetes-basics/myths/" target="_blank">Dispelling the Myths</a></p>
+						  <p>There are myths about diabetes that are all too commonly reported as fact. Find out what's fact and what's fiction.</p>
+						</div>
+						<div class="col-md-3 hidden-xs hidden-sm text-right" style="height:243px;padding:0;"> <img style="height: 100%;border-top-right-radius: 12px;" src="../ws/risktest/img/relatedinfos/Risk_Test_Image_Dispelling_Myths_130x240px.jpg" alt="Dispelling the Myths" /> </div>
+						<div style="clear:both;height:1px;">&nbsp;</div>
+					  </div>
+					</div>-->
+					
+					<div class="col-md-4">
+						<div class="rrboxes equalheight">
+							<div class="rrboxesimg"><img class="rrboxsqimg" src="../ws/risktest/img/relatedinfos/Risk_Test_Image_Dispelling_Myths_230x180px.jpg" alt="Dispelling the Myths" /></div>
+							<div class="rrboxestxtcontent text-center">
+						<p><a class="bolder" href="http://www.diabetes.org/diabetes-basics/myths/" target="_blank">Dispelling the Myths</a></p>
+					<!--<p>There are myths about diabetes that are all too commonly reported as fact. Find out what's fact and what's fiction.</p>-->
+							</div></div>
+					</div>
+					
+					<div class="col-md-4">
+						<div class="rrboxes equalheight"><div class="rrboxestxtcontent">
+						<p><a class="bolder" href="http://www.diabetes.org/diabetes-basics/common-terms/" target="_blank">Common Terms</a></p>
+					<p>There are many acronyms and medical terms used when talking about diabetes. Let us help you understand what they mean.</p>
+							</div></div>
+					</div>
+					
+					<div class="col-md-4">
+						<div class="rrboxes equalheight">
+						<div class="rrboxestxtcontent">
+						<p><a class="bolder" href="http://www.diabetes.org/are-you-at-risk/prediabetes/" target="_blank">What is Prediabetes?</a></p>
+					<p>Before people develop type 2 diabetes, they almost always have "prediabetes.&#8221; Yet with exercise and a change in diet, you can delay or prevent diabetes.</p>
+							</div></div>
+					</div> 
+					
+				</div>
+				
+				<!--<div class="row">
+					<div class="col-md-4">
+						<div class="rrboxes equalheight">
+						<div class="rrboxestxtcontent">
+						<p><a class="bolder" href="http://www.diabetes.org/are-you-at-risk/prediabetes/" target="_blank">What is Prediabetes?</a></p>
+					<p>Before people develop type 2 diabetes, they almost always have "prediabetes.&#8221; Yet with exercise and a change in diet, you can delay or prevent diabetes.</p>
+							</div></div>
+					</div> 
+				</div> -->
+				
+				
+				<div class="text-right"><a onClick="scrollToTarget('highrisknav');" style="font-size: 14pt;">Back to Menu</a></div>
+				<div style="clear:both;height:50px;">&nbsp;</div>
+			</div>
+			
+			<div id="healthyeating" class="inithide subsectioncontent">
+			<div style="clear:both;height:20px;">&nbsp;</div>
+			    <div class="introboxes">
+				<p class="resultTextBig">Healthy Eating</p>
+				<!--<p>In the past, meal plans for people with diabetes were very complex. But the science has evolved. There isn&#8217;t a one-size fits all diabetes diet, so your meal can meet your personal needs.</p>
+				<p>While you may need to make some changes, you decide what&#8217;s on the menu. You can still include your favorite foods. </p>-->
+<p>Finding out that you are at high risk can be a lot to take in, and what to eat can be a big concern. The key is to know how to eat a healthy meal</p>
+				</div>
+				<div style="clear:both;height:20px;">&nbsp;</div>				
+				
+				
+				<p><strong>RELATED RESOURCES</strong></p>
+				<div class="row">
+					<div class="col-md-4">
+						<div class="rrboxes equalheight"><div class="rrboxestxtcontent">
+						<p><a class="bolder" href="http://www.diabetes.org/food-and-fitness/food/what-can-i-eat/making-healthy-food-choices/" target="_blank">Making Healthy Food Choices</a></p>
+					<p>Learn about the most nutritious choices for each food group and find the ones that will work with your eating plan.</p>
+							</div></div>
+					</div>
+					
+					<div class="col-md-4">						
+						<div class="rrboxes equalheight">
+						<div class="rrboxesimg"><img class="rrboxsqimg" src="../ws/risktest/img/relatedinfos/Risk_Test_Image_DFH_230x180px.jpg" alt="Diabetes Food Hub" /></div>
+						<div class="rrboxestxtcontent text-center">
+						<p><a class="bolder" href="https://diabetesfoodhub.org" target="_blank">Diabetes Food Hub</a></p>					
+							</div></div>
+					</div>
+					<div class="col-md-4">
+						<div class="rrboxes equalheight"><div class="rrboxestxtcontent">
+						<p><a class="bolder" href="http://www.diabetes.org/food-and-fitness/food/what-can-i-eat/making-healthy-food-choices/what-can-i-drink.html" target="_blank">What Can I Drink?</a></p>
+					<p>Food is often a focus when it comes to diabetes, but don't forget that beverages can also affect your weight and blood glucose.</p>
+							</div></div>
+					</div>
+				</div>
+				<div style="clear:both;height:5px;">&nbsp;</div>
+				
+				<div class="row">
+					<div class="col-md-4">
+						<div class="rrboxes equalheight">
+						<div class="rrboxesimg"><img class="rrboxsqimg" src="../ws/risktest/img/relatedinfos/Risk_Test_Image_Our_Cookbooks_230x180px.jpg" alt="Our Cookbooks" /></div>
+						<div class="rrboxestxtcontent text-center">
+						<p><a class="bolder" href="http://www.shopdiabetes.org/Categories/11-Diabetes-Cookbooks-And-Recipes.aspx" target="_blank">Our Cookbooks</a></p>
+					<!--<p>We have lots of cookbooks to help you make healthy choices. From quick meals to regional favorites to cooking for two, we have the tools you need to eat well.</p>-->
+							</div></div>
+					</div>
+					<div class="col-md-4">
+						<div class="rrboxes equalheight"><div class="rrboxestxtcontent">
+						<p><a class="bolder" href="http://www.diabetesforecast.org/landing-pages/dt-page.html?food=wcie-away-from-home" target="_blank">Eating Wisely Away from Home</a></p>
+					<p>Healthy eating on the go can be tough. Our <em>Diabetes Forecast</em> magazine has great tips for eating well while dining out.</p>
+							</div></div>
+					</div>
+					
+					<div class="col-md-4">
+						<div class="rrboxes equalheight"><div class="rrboxestxtcontent">
+						<p><a class="bolder" href="http://www.diabetes.org/food-and-fitness/food/planning-meals/create-your-plate/" target="_blank">Create Your Plate</a></p>
+					<p>Our interactive tool will help you learn a simple and effective way to manage you blood glucose levels and your weight.</p>
+							</div></div>
+					</div>
+				</div>
+				<div class="text-right"><a onClick="scrollToTarget('highrisknav');" style="font-size: 14pt;">Back to Menu</a></div>
+				<div style="clear:both;height:50px;">&nbsp;</div>
+			</div>
+			
+			
+			<div id="physicalexercise" class="inithide subsectioncontent">
+			<div style="clear:both;height:20px;">&nbsp;</div>
+			    <div class="introboxes">
+				<p class="resultTextBig">Physical Exercise</p>
+				<p>We know being active can help reduce your risk for diabetes and other health problems. But, it can be hard to get started. The ADA is here to help you get and stay active. </p>
+				</div>
+				<div style="clear:both;height:20px;">&nbsp;</div>				
+				
+				
+				<p><strong>RELATED RESOURCES</strong></p>
+				<div class="row">
+					<div class="col-md-4">
+						<div class="rrboxes equalheight">
+						<div class="rrboxesimg"><img class="rrboxsqimg" src="../ws/risktest/img/relatedinfos/Risk_Test_Image_Get_Moving_for_Good_230x180px.jpg" alt="Get Moving for Good" /></div>
+						<div class="rrboxestxtcontent text-center">
+						<p><a class="bolder" href="http://diabetes.org/tour" target="_blank">Get Moving for Good</a></p>
+					<!--<p>Even if you've never exercised before, finding ways to add physical activity to your day can make a significant difference.</p>-->
+							</div></div>
+					</div>
+					<div class="col-md-4">
+						<div class="rrboxes equalheight"><div class="rrboxestxtcontent">
+						<p><a class="bolder" href="http://www.diabetes.org/food-and-fitness/fitness/types-of-activity/ways-to-burn-100-calories.html" target="_blank">Ways to Burn 100 Calories</a></p>
+					<p>Burning 100 calories can be easy with these easy exercises that take only 10-30 minutes.</p>
+							</div></div>
+					</div>
+					<div class="col-md-4">
+						<div class="rrboxes equalheight">						
+						<div class="rrboxestxtcontent">
+						<p><a class="bolder" href="http://www.diabetesforecast.org/2017/jul-aug/active-lifestyle-guide-2017.html?loc=morefrom" target="_blank">What Can Physical Activity Do for Me?</a></p>
+					<p>Even if you've never exercised before, finding ways to add physical activity to your day can make a significant difference.</p>
+							</div></div>
+					</div>
+				</div>
+				<div style="clear:both;height:5px;">&nbsp;</div>
+				
+				<div class="row">
+					<div class="col-md-4">
+						<div class="rrboxes equalheight"><div class="rrboxestxtcontent">
+						<p><a class="bolder" href="https://professional.diabetes.org/pel/physical-activity-english" target="_blank">Tip Sheet: Physical Activity</a></p>
+					<p>Take this tip sheet with you as you start your plan for physical activity. </p>
+							</div></div>
+					</div>
+					<div class="col-md-4">
+						<div class="rrboxes equalheight"><div class="rrboxestxtcontent">
+						<p><a class="bolder" href="http://www.diabetes.org/food-and-fitness/fitness/get-and-stay-fit/staying-motivated.html" target="_blank">Staying Motivated</a></p>
+					<p>With busy schedules, it can be hard to stay motivated. Follow our tips for keeping up your efforts.</p>
+							</div></div>
+					</div>
+					<div class="col-md-4">
+						<div class="rrboxes equalheight">
+						<div class="rrboxesimg"><img class="rrboxsqimg" src="../ws/risktest/img/relatedinfos/Risk_Test_Image_Active_Lifestyle_Guide_230x180px.jpg" alt="Active Lifestyle Guide" /></div>
+						<div class="rrboxestxtcontent text-center">
+						<p><a class="bolder" href="http://www.diabetesforecast.org/2017/jul-aug/active-lifestyle-guide-2017.html?loc=morefrom" target="_blank">Active Lifestyle Guide</a></p>
+					<!--<p>Even if you've never exercised before, finding ways to add physical activity to your day can make a significant difference.</p>-->
+							</div></div>
+					</div>
+				
+				</div>
+				<div class="text-right"><a onClick="scrollToTarget('highrisknav');" style="font-size: 14pt;">Back to Menu</a></div>
+				<div style="clear:both;height:50px;">&nbsp;</div>
+			</div>
+			
+			
+			
+
+</div>
+
+
