@@ -1,0 +1,18 @@
+<iframe id="my_iframe" src="" width="100%" frameborder="0" scrolling="no"></iframe>
+
+
+<!-- iframe resizer library -->
+<script type="text/javascript" src="../ws/js/iframeresizer/iframeResizer355.min.js"></script>
+<!--[if lt IE 9]>	 
+      <script src="../ws/js/iframeresizer/ie8.polyfils.min.js"></script>
+<![endif]-->
+
+<script type="text/javascript">
+    document.getElementById('my_iframe').onload = function() {
+        iFrameResize({log:false})
+    }
+</script>
+
+<style>
+div#ADAContent{background: #FFF;background: linear-gradient(#FFF, #CCC);}
+</style>
