@@ -1,0 +1,282 @@
+<!--ADDTHIS-->
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5aaeee1353a8c29f"></script>
+
+[[?xxxx::xx[[S334:vmode]]xx::
+<div id="RTscorearea">
+
+<p><strong>YOU ARE AT</strong></p>
+		<div class="row">	
+			<div class="col-md-9">
+				<div class="row">
+					<div class="col-md-7">
+					<p id="riskLblHigh" class="resultTextBig highresults">High Risk</p>
+					<p id="riskLblLow" class="resultTextBig lowresults">Low Risk</p>
+					</div>
+					<div class="col-md-5">
+					<p>SCORE <span id="mytotalscoreval"></span> / 10</p>
+						<div id="mybox"><div id="stripes2">
+						<div id="greybox10" class="greyboxes"></div>
+						<div id="greybox9" class="greyboxes"></div>
+						<div id="greybox8" class="greyboxes"></div>
+						<div id="greybox7" class="greyboxes"></div>
+						<div id="greybox6" class="greyboxes"></div>
+						<div id="greybox5" class="greyboxes"></div>
+						<div id="greybox4" class="greyboxes"></div>
+						<div id="greybox3" class="greyboxes"></div>
+						<div id="greybox2" class="greyboxes"></div>
+						<div id="greybox1" class="greyboxes"></div>
+						</div></div>
+					</div>
+					<div style="clear:both;height:20px;">&nbsp;</div>
+					<p class="highresults">Your risk for having type 2 diabetes is high. Only your doctor can tell for sure if you have diabetes or prediabetes. These conditions often do not cause any symptoms; so, don&#8217;t wait to make an appointment with your doctor.</p>
+					
+					<p class="lowresults">Right now, your risk for having type 2 diabetes is low. However, your risk changes over time. Be sure to schedule regular check-ups with your doctor and take healthy steps toward preventing or delaying diabetes.</p>
+					
+					<p class="lowresults">An estimated 7.2 million people with diabetes are undiagnosed, and 1 in 3 American adults is at risk for developing type 2 diabetes. Do you think people you care about may be among them? Help them learn their risk by sharing the Type 2 Diabetes Risk Test.</p>
+					
+					<div class="lowresults">
+					<div id="shareboxlow" class="row">
+						<div class="col-md-9">
+						<!--<a class="bolder" style="background-color:#C92E36;color:#FFF;text-decoration:none !important;padding:15px 12px;display:block;margin-top:10px;"><i class="fa fa-share-alt" style="font-size:24px;color:#FFF;"></i> SHARE THIS TEST WITH YOUR FRIENDS AND FAMILY</a>-->
+<p class="bolder" style="font-size:14px;color:#C92E36"><i class="fa fa-share-alt" style="font-size:24px;"></i> SHARE THIS TEST WITH YOUR FRIENDS AND FAMILY</p>
+
+<!--data-url="THE URL" data-title="THE TITLE" data-description="THE DESCRIPTION" data-media="THE IMAGE"-->
+<div class="addthis_inline_share_toolbox" data-url="https://donations.diabetes.org/site/SPageServer?pagename=Diabetes_Risk_Test&source=ada&cate=socialshare&loca=result"></div>
+<!--ADDTHIS-->
+
+						</div>
+						<div class="col-md-3 text-right"><div class="visible-xs visible-sm" style="clear:both;height:20px"></div><a class="bolder" style="font-size:17px;margin-top: 5px;display: block;" onClick="openContent('AboutRisk');">About the Risk Test <i class="fa fa-angle-right"></i></a></div>
+					</div>
+					<div style="clear:both;height:10px;">&nbsp;</div>
+					</div>
+					<div class="highresults">
+					<div class="row">
+						<div class="col-md-6">
+						<a id="emailresbtnhigh" class="bolder notyetemailed text-center" style="background-color:#C92E36;color:#FFF;text-decoration:none !important;padding:15px 12px;display:block;margin-top:10px;border-radius:7px;" onClick="scrollToTarget('emailResult')">EMAIL YOUR SCORE</a>
+
+
+						</div>
+						<div class="col-md-6 text-right"><div style="clear:both;height:20px"></div><a class="bolder" style="font-size:17px;margin-top: 5px;display: block;" onClick="openContent('AboutRisk');">About the Risk Test <i class="fa fa-angle-right"></i></a></div>
+					</div>
+					<div style="clear:both;height:10px;">&nbsp;</div>	
+					
+					</div>
+	
+				</div>
+			</div>
+			<div class="col-md-3 text-center" style="background-color:#FFF;border-radius:5px;box-shadow:2px 2px #CCC;border:#e0e0e0 solid 1px;padding: 15px 25px;">
+				<p class="bolder" style="font-size:17pt;margin:20px 0;">Learn more about how your answers affected your result</p>
+				<!--<p><a class="bolder" onClick="magPop('revscore');">Review Your Answers</a></p>-->
+				<p><a class="bolder" onClick="openContent('revscore');">Review Your Answers</a></p>
+			</div>
+		</div>
+		
+		<div class="highresults">
+					<div style="clear:both;height:35px;">&nbsp;</div>
+					[[S51:EN_Risk_Test_Doctor_API]]
+					<div style="clear:both;height:35px;">&nbsp;</div>
+						<center>
+						<p id="shareboxhigh" class="bolder" style="font-size:14px;color:#C92E36"><i class="fa fa-share-alt" style="font-size:24px;"></i> SHARE THIS TEST WITH YOUR FRIENDS AND FAMILY</p>
+							<!--data-url="THE URL" data-title="THE TITLE" data-description="THE DESCRIPTION" data-media="THE IMAGE"-->
+<div class="addthis_inline_share_toolbox" data-url="https://donations.diabetes.org/site/SPageServer?pagename=Diabetes_Risk_Test&source=ada&cate=socialshare&loca=result"></div>
+<!--ADDTHIS-->
+						</center>
+						<div style="clear:both;height:15px;">&nbsp;</div>
+					</div>
+		
+		<div style="clear:both;height:50px;">&nbsp;</div>
+</div>
+
+::
+[[?xxndxx::xx[[S334:vmode]]xx::
+	<div id="newlydiagnosed">
+		<center>
+			<p class="resultTextBig">Newly Diagnosed</p>
+			<p>With Type 2</p>
+		</center>
+
+		<p>When learning to live with type 2 diabetes, the journey can sometimes be overwhelming. You are not alone. The American Diabetes Association is here to support you every step of the way with information and resources designed for people recently diagnosed with type 2 diabetes. Make each moment count by having the confidence to make informed decisions that will help you thrive.</p>
+
+		<div style="clear:both;height:35px;">&nbsp;</div>
+		[[S51:EN_Risk_Test_Doctor_API]]
+		<div style="clear:both;height:35px;">&nbsp;</div>
+	</div>
+::]]
+
+
+[[?xxlyrxx::xx[[S334:vmode]]xx::
+	<div id="loweryourrisk">
+		<center>
+			<p class="resultTextBig">Lower Your Risk</p>
+			<p>for Type 2 Diabetes</p>
+		</center>
+
+		<p>When learning you&#8217;re at risk for type 2 diabetes, the journey can sometimes be overwhelming. The most important step you can take now is to speak with a doctor about your type 2 diabetes risk. Don&#8217;t put it off. If left untreated, diabetes can lead to major complications; however, early detection and treatment of diabetes can decrease your risk of developing these complications significantly.</p>
+
+		<div style="clear:both;height:35px;">&nbsp;</div>
+		[[S51:EN_Risk_Test_Doctor_API]]
+		<div style="clear:both;height:35px;">&nbsp;</div>
+	</div>
+::]]
+
+]]
+
+<!--<div id="revscore" class="so-popout mfp-hide">-->
+<div id="revscore" class="inithide">
+	<div id="revscorecontent" style="padding:20px;">
+	<center>
+		<p>YOUR RISK FACTORS</p>
+		<p class="bolder">Learn more about how your answers affected your result</p>
+	</center>
+	
+<p><a class="bolder" onClick="openContent('RiskScore');"><i class="fa fa-reply" aria-hidden="true"></i> Back to Score Page</a></p>
+	
+	<div id="q2review" class="reviewanswers">
+		<div style="clear:both;height:15px;">&nbsp;</div>
+		<img src="../ws/risktest/img/qpaginator2.png" class="scorerevpaginatorimgs hidden-xs hidden-sm" />
+		<p class="bolder hidden-md hidden-lg">Age</p>
+		<div style="clear:both;height:15px;">&nbsp;</div>
+		<p id="q2a0" class="inithide rmyanswer"><strong>1. Less than 40 years old</strong> 0 point</p>
+		<p id="q2a1" class="inithide rmyanswer"><strong>1. 40-49 years old</strong> 1 point</p>
+		<p id="q2a2" class="inithide rmyanswer"><strong>1. 50-59 years old</strong> 2 points</p>
+		<p id="q2a3" class="inithide rmyanswer"><strong>1. 60 years or older</strong> 3 points</p>
+		<div style="clear:both;height:15px;">&nbsp;</div>
+		<p>As you get older, your risk for type 2 diabetes increases. People 50 and older automatically score a point higher due to their age. You can&#8217;t stop the aging process, but you can take steps to reduce your risk through lifestyle changes and/or medication.</p>
+		<div style="clear:both;height:15px;">&nbsp;</div>
+		<div class="row">
+			<div class="col-xs-6">
+				
+			</div>
+			<div class="col-xs-6">
+				<a class="bluebtn" onClick="openContent('q3review');">Next</a>
+			</div>
+		</div>
+		<div style="clear:both;height:15px;">&nbsp;</div>
+	</div>
+	<div id="q3review" class="reviewanswers inithide">
+		<div style="clear:both;height:15px;">&nbsp;</div>
+		<img src="../ws/risktest/img/qpaginator3.png" class="scorerevpaginatorimgs hidden-xs hidden-sm" />
+		<br />
+		<p class="bolder hidden-md hidden-lg">Gender</p>
+		<div style="clear:both;height:15px;">&nbsp;</div>
+		<p id="q3a0-0" class="inithide rmyanswer"><strong>2. Woman with No History of Gestational Diabetes</strong> 0 point</p>
+		<p id="q3a0-1" class="inithide rmyanswer"><strong>2. Woman with History of Gestational Diabetes</strong> 1 point</p>
+		<p id="q3a1" class="inithide rmyanswer"><strong>2. Man</strong> 1 point</p>
+		<div style="clear:both;height:15px;">&nbsp;</div>
+		<p id="mandesc" class="inithide">Men are more likely than women to have undiagnosed type 2 diabetes; one reason may be that they are less likely to see their doctor regularly.</p>
+		<p id="womandesc" class="inithide">Many women who have gestational diabetes go on to develop type 2 diabetes later in life.</p>
+		<div style="clear:both;height:15px;">&nbsp;</div>
+		<div class="row">
+			<div class="col-xs-6">
+				<a class="bluebtn" onClick="openContent('q2review');">Previous</a>
+			</div>
+			<div class="col-xs-6">
+				<a class="bluebtn" onClick="openContent('q4review');">Next</a>
+			</div>
+		</div>
+		<div style="clear:both;height:15px;">&nbsp;</div>
+	</div>
+	<div id="q4review" class="reviewanswers inithide">
+		<div style="clear:both;height:15px;">&nbsp;</div>
+		<img src="../ws/risktest/img/qpaginator4.png" class="scorerevpaginatorimgs hidden-xs hidden-sm" />		
+		<p class="bolder hidden-md hidden-lg">Family History</p>
+		<div style="clear:both;height:15px;">&nbsp;</div>
+		<p id="q4a0" class="inithide rmyanswer"><strong>3.No Family History with Diabetes</strong> 0 point</p>
+		<p id="q4a1" class="inithide rmyanswer"><strong>3. Family History with Diabetes</strong> 1 point</p>
+		<div style="clear:both;height:15px;">&nbsp;</div>
+		<p>There is a link between type 2 diabetes and family history, although the risk also relates to enviromental and lifestyle factors that family members share.</p>
+		<div style="clear:both;height:15px;">&nbsp;</div>
+		<div class="row">
+			<div class="col-xs-6">
+				<a class="bluebtn" onClick="openContent('q3review');">Previous</a>
+			</div>
+			<div class="col-xs-6">
+				<a class="bluebtn" onClick="openContent('q5review');">Next</a>
+			</div>
+		</div>
+		<div style="clear:both;height:15px;">&nbsp;</div>
+	</div>
+	<div id="q5review" class="reviewanswers inithide">
+		<div style="clear:both;height:15px;">&nbsp;</div>
+		<img src="../ws/risktest/img/qpaginator5.png" class="scorerevpaginatorimgs hidden-xs hidden-sm" />
+		<p class="bolder hidden-md hidden-lg">Blood Pressure</p>
+		<div style="clear:both;height:15px;">&nbsp;</div>
+		<p id="q5a0" class="inithide rmyanswer"><strong>4. No History of Blood Pressure</strong> 0 point</p>
+		<p id="q5a1" class="inithide rmyanswer"><strong>4. Blood Pressure History</strong> 1 point</p>
+		<div style="clear:both;height:15px;">&nbsp;</div>
+		<p>High blood pressure not only raises your risk for type 2 diabetes, but also increases risk of heart attack, stroke, eye problems and kidney disease.</p>
+		<div style="clear:both;height:15px;">&nbsp;</div>
+		<div class="row">
+			<div class="col-xs-6">
+				<a class="bluebtn" onClick="openContent('q4review');">Previous</a>
+			</div>
+			<div class="col-xs-6">
+				<a class="bluebtn" onClick="openContent('q6review');">Next</a>
+			</div>
+		</div>
+		<div style="clear:both;height:15px;">&nbsp;</div>
+	</div>
+	<div id="q6review" class="reviewanswers inithide">
+		<div style="clear:both;height:15px;">&nbsp;</div>
+		<img src="../ws/risktest/img/qpaginator6.png" class="scorerevpaginatorimgs hidden-xs hidden-sm" />
+		<p class="bolder hidden-md hidden-lg">Physical Activities</p>
+		<div style="clear:both;height:15px;">&nbsp;</div>
+		<p id="q6a1" class="inithide rmyanswer"><strong>5. Physically Inactive</strong> 1 point</p>
+		<p id="q6a0" class="inithide rmyanswer"><strong>5. Physically Active</strong> 0 point</p>
+		<div style="clear:both;height:15px;">&nbsp;</div>
+		<p>Exercising regularly lowers your risk for prediabetes and type 2 diabetes.</p>
+		<div style="clear:both;height:15px;">&nbsp;</div>
+		<div class="row">
+			<div class="col-xs-6">
+				<a class="bluebtn" onClick="openContent('q5review');">Previous</a>
+			</div>
+			<div class="col-xs-6">
+				<a class="bluebtn" onClick="openContent('q8review');">Next</a>
+			</div>
+		</div>
+		<div style="clear:both;height:15px;">&nbsp;</div>
+	</div>
+	<div id="q8review" class="reviewanswers inithide">
+		<div style="clear:both;height:15px;">&nbsp;</div>
+		<img src="../ws/risktest/img/qpaginator8.png" class="scorerevpaginatorimgs hidden-xs hidden-sm" />
+		<p class="bolder hidden-md hidden-lg">BMI</p>
+		<div style="clear:both;height:15px;">&nbsp;</div>
+		<p id="q8a0" class="inithide rmyanswer"><strong>7. Normal Body Mass Index</strong> 0 point</p>
+		<p id="q8a1" class="inithide rmyanswer"><strong>7. Above Normal Body Mass Index</strong> 1 point</p>
+		<p id="q8a2" class="inithide rmyanswer"><strong>7. High Body Mass Index</strong> 2 points</p>
+		<p id="q8a3" class="inithide rmyanswer"><strong>7. Very High Body Mass Index</strong> 3 points</p>
+		<div style="clear:both;height:15px;">&nbsp;</div>
+		<p>BMI is a measure of your height vs. your weight. Having a higher BMI raises your risk for type 2 diabetes.</p>
+		<div style="clear:both;height:15px;">&nbsp;</div>
+		<div class="row">
+			<div class="col-xs-6">
+				<a class="bluebtn" onClick="openContent('q6review');">Previous</a>
+			</div>
+			<div class="col-xs-6">
+				
+			</div>
+		</div>
+
+		<div style="clear:both;height:15px;">&nbsp;</div>
+	</div>
+	
+	</div>
+	
+</div>
+
+<div id="aboutrisktest" class="inithide">
+	
+<!--<button onclick="scrollToTarget('aboutrisktest');" class="topbuttons visible-xs visible-sm" title="Go to top">Top</button>-->
+
+	<p class="resultTextBig" style="margin-top:20px;">About the Risk Test</p>
+	<p><a class="bolder" onClick="openContent('RiskScore');"><i class="fa fa-reply" aria-hidden="true"></i> Back to Score Page</a></p>
+	
+<p>Approximately 84 million American adults have prediabetes, a condition where blood glucose levels are higher than normal but not high enough for a type 2 diabetes diagnosis. What&#8217;s more, nearly 90 percent of those people are unaware they have the condition. With so many people at risk for developing type 2 diabetes, it&#8217;s critical for Americans to learn their risk, to be screened regularly and to take the steps necessary to delay or even prevent a diabetes or prediabetes diagnosis.</p>
+
+<p>The ADA launched its first Risk Test in 1993. The test was adapted by a published study and validated using data from the Centers for Disease Control and Prevention (CDC). When developing the Test, researchers looked for specific characteristics that made a person more likely than average to have undiagnosed type 2 diabetes. To make the tool as easy to use as possible, they only considered health characteristics that people would know about themselves without needing a blood test or other medical evaluation&#8212;such as age, height and weight, but not including blood glucose or cholesterol levels.</p>
+
+<p>A high score on the online Risk Test (five or higher) means an individual has a significant risk for having undiagnosed prediabetes or type 2 diabetes; however, only a blood test can determine a diagnosis.</p>
+
+</div>
+
+
