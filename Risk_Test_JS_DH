@@ -1,0 +1,2239 @@
+<script src="../ws/js/moment.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
+<script type="text/javascript">	
+	
+	var jqxhr;
+	var dppList;
+	var erpList
+	var counter=1;
+	var currLoc;
+	var nextLoc;
+	var prevLoc;
+	var totalQuestions=0;
+	var totalScore=0;
+	var arrIndex;
+	
+	var answerValArr = new Array(); // collect the text of selected answer per question
+	var answerScoreArr = new Array(); // collect the score per question
+	var selectedAnswers = new Array(); // collect selected answer index per question
+	var selectedSubAnswers = new Array(); // collect selected subanswer index per question
+	
+	var noscore = new Array();//check with questions has score and which do not
+	
+	
+	var acount;
+	var sacount;
+	var subQforAVal;
+
+	var heightArr = new Array();
+	var weightArrAll = new Array();
+	var weightArr = new Array();
+	var weightArr2 = new Array(); // asian
+	
+	var allWeightOptions = new Array();
+	
+	var whatLang = getURLParameter('lang');
+	var whatCat = getURLParameter('cate');
+	var whatSource = getURLParameter('source');
+	var whatLoc = getURLParameter('loca');
+	
+	var isAsian;	
+    var hasEmailed=0;
+	var lrtdate;
+	var recordID;
+	
+	var totaldppfeat=0;
+	var totaldpponline=0;
+	var totaldppip=0;
+	
+	var itemsize = new Array();
+	var itemperline = new Array();
+	
+	var urlRef = document.referrer;
+	var baseURL;
+	
+	
+//var adaapiurl ='https://risktest-api-uat.diabetes.org/api/testresponse';
+//var dppapiurl = 'https://risktest-api-uat.diabetes.org/api/dpp';
+
+var adaapiurl = 'https://risktest-api.diabetes.org/api/testresponse';
+var dppapiurl = 'https://risktest-api.diabetes.org/api/dpp';
+
+var erpapiurl = 'https://professional.diabetes.org/rendpoint/erp_listing.json';
+//var erpapiurl='https://adastg-180201.srv2.civi-go.net/rendpoint/erp_listing.json';
+	
+
+	//var atok='https://d-techlab.net/utils/rtapi2.php';
+	//var atokJSON;
+	//var atokval;
+	
+	
+	var isGDPR=0;
+
+
+		
+	$(document).ready(function(){
+		//getDPPList();
+		//console.log(recordID);
+		
+		//Marketo
+		MktoForms2.loadForm("//app-ab24.marketo.com", "103-QCF-311", 1038);
+		//MktoForms2.loadForm("//app-ab24.marketo.com", "106-CXJ-811", 1005);
+		
+		//console.log(whatLang);
+		if(whatLang==='null'){
+			whatLang='EN';
+		} else {
+			whatLang = whatLang.toUpperCase();
+		}
+		
+		if(whatCat==='null'){
+			whatCat='unknown';
+		} else{
+			whatCat = whatCat.toLowerCase();
+		}
+		
+		if(whatSource==='null'){
+			whatSource='dorg';
+		} else {
+			whatSource = whatSource.toLowerCase();
+		}
+		
+		/*atokJSON = $.getJSON(atok, function(data){
+			atokval = data.access_token;
+		});*/
+
+		jqxhr = $.getJSON('../ws/risktest/'+whatLang+'.json?nocache='+(new Date()).getTime(), function(data){
+			//console.log('success');
+			//console.log(data);
+			
+			var renderQ = $('#root');
+			
+			
+			var submitBtn0 = data.configGeneral.submitBtns.submitBtn0;
+			var submitBtn1 = data.configGeneral.submitBtns.submitBtn1;
+			var introText = data.configGeneral.introText;
+			
+			var qitems = data.questionnaires.map(function (qitem){
+				acount=0;
+				sacount=0;
+				var myQ = '';
+				
+				if(qitem.paginatorImg){
+					myQ += '<div id="paginator'+qitem.qid+'" class="hidden-sm hidden-xs text-center paginatorbars"><img src="'+qitem.paginatorImg+'" /></div>';
+				}
+				
+				if(qitem.noscore){				
+					noscore[counter]=qitem.noscore;										
+				}				
+				
+				//console.log(acount);
+				myQ += '<div class="questionnairebox risktestboxes" id="question'+qitem.qid+'" >';
+				
+				if(qitem.questionlayout==='1col'){
+					myQ += '<div style="clear:both;height:65px">&nbsp;</div>';
+					myQ += '<div style="max-width:800px;min-width:280px;width:100%;margin:0 auto;padding:0 10px;" class="text-center" >';
+					myQ += '<p style="font-size:28px;font-weight:400;">'+introText+'</p>';
+					myQ += '<div style="clear:both;height:25px;">&nbsp;</div>';
+					myQ += '<p class="questionText hidden-sm hidden-xs" style="font-size:46px;">'+qitem.question+'</p><p class="questionText visible-sm visible-xs" style="font-size:36px;">'+qitem.question+'</p>';
+					myQ += '<div style="clear:both;height:45px;">&nbsp;</div>';
+					
+					
+				} else {
+					myQ += '<div class="container-fluid"><div class="col-md-8 equalheight"><div style="clear:both;height:25px">&nbsp;</div>';
+					myQ += '<div style="padding:20px;">';
+					myQ += '<p class="questionText">'+qitem.question+'</p>';
+					myQ += '<center><img id="q'+qitem.qid+'img" src="'+qitem.hintImage+'" class="qiconsmobile hidden-md hidden-lg" /></center>';
+					if(qitem.hintStatus==='y'){
+						myQ += '<p><a class="hintToggle" onclick="toggleHint('+qitem.qid+')"><i class="fa fa-info-circle" aria-hidden="true"></i> '+data.configGeneral.hintLabel+'</a></p>';						
+						myQ +='<div id="hint'+qitem.qid+'" class="hintcontents"><p>'+qitem.hintDesc+'</p></div>';
+					}					
+					myQ += '<div style="clear:both;height:25px;">&nbsp;</div>';
+				}
+				
+				if(qitem.answers){
+				
+					$.each(qitem.answers, function(answerLabel, answerVal){	
+						acount++;
+						switch(qitem.qid){
+							case '1':
+							case '2':
+							case '3':
+							case '4':						
+							case '5':
+							case '6':
+                            case '7':							
+								if(!isEven(acount)){
+									myQ += '<div class="row">';
+								}
+								if(qitem.questionlayout==='1col'){
+									myQ += '<div class="col-md-6"><a id="q'+qitem.qid+answerLabel+'" class="redbtn text-center" onClick="handleAnswer(\'q'+qitem.qid+answerLabel+'\');" style="height:72px;line-height:26px;padding-top:20px;">'+answerVal+'</a></div>';
+								} else {
+									if(qitem.subquestion){
+										myQ += '<div class="col-md-6"><a id="q'+qitem.qid+answerLabel+'" class="redbtn mainanswers text-center" onClick="handleAnswer(\'q'+qitem.qid+answerLabel+'\',1);">'+answerVal+'</a></div>';
+									}else{
+										if (qitem.qid != '7'){
+											myQ += '<div class="col-md-6"><a id="q'+qitem.qid+answerLabel+'" class="redbtn mainanswers text-center" onClick="handleAnswer(\'q'+qitem.qid+answerLabel+'\');">'+answerVal+'</a></div>';
+										} else {
+											myQ += '<div class="col-md-6"><a id="q'+qitem.qid+answerLabel+'" class="redbtn mainanswers text-center" style="font-size:12px;padding-top:12px;" onClick="handleAnswer(\'q'+qitem.qid+answerLabel+'\');">'+answerVal+'</a></div>';
+										}
+									}
+								}
+								if(isEven(acount)){
+									myQ += '<div style="clear:both;height:1px;">&nbsp;</div>';	
+									myQ += '</div>'; // to close the row
+								}
+								break;	
+								
+							/*case '7':
+									if(!isEven(acount)){
+										myQ += '<div class="row">';
+									}
+									myQ += '<div class="col-md-6 checboxesdiv"><input type="checkbox" class="biggercb" name="qcb'+qitem.qid+'" id="qcb'+qitem.qid+'-'+acount+'" value="'+answerVal+'"> &nbsp;'+answerVal+'</div>';
+									if(isEven(acount)){
+										myQ += '<div style="clear:both;height:1px;">&nbsp;</div>';	
+										myQ += '</div>';
+									}*/
+									/*if (acount===1){
+										myQ += '<div><select id="q'+qitem.qid+'">';
+									}
+									myQ += '<option value="'+answerVal+'">'+answerVal+'</option>';
+									if(acount===8){
+										myQ += '</select><div style="clear:both;height:1px;">&nbsp;</div></div>';
+									}*/
+								//break;
+							
+							case '8':
+										
+									var currAnswerLbl = answerLabel;
+									var whichAnswerVal = parseInt(currAnswerLbl.substr(currAnswerLbl.length-1));
+								    if(whichAnswerVal %2 === 0){
+										heightArr.push(answerVal);
+										
+									} else {
+										//console.log(answerVal);	
+										weightArrAll=answerVal.split('||');
+										weightArr.push(weightArrAll[0]);
+										weightArr2.push(weightArrAll[1]);
+										//console.log(weightArr);
+
+
+										//console.log(weightArr2);
+									}
+										
+								break;
+
+
+						}					
+					});
+					
+					if(qitem.qid==='8'){						
+						//console.log(heightArr);
+						//console.log(weightArr);
+						myQ += '<div class="row">';
+						myQ += '<div class="col-md-6"><select id="qheight'+qitem.qid+'" onchange="showWeightRange('+qitem.qid+');">';
+						for(var x=0;x<heightArr.length;x++){							
+							if(x===0){
+								myQ += '<option id="hoption0" value="">'+heightArr[x]+'</option>';
+							} else {
+								if(x===1){
+								var hoptindex = x+1;
+								} else {
+									hoptindex = hoptindex+2;
+								}
+var myehval = encodeURI(heightArr[x]);
+								myQ += '<option id="hoption'+hoptindex+'" value="'+myehval+'">'+heightArr[x]+'</option>';
+							}
+							
+						}
+						
+						myQ += '</select></div>';
+						myQ += '<div class="col-md-6"><select id="qweight'+qitem.qid+'" disabled onchange="processBMI('+qitem.qid+');">';	
+						
+						for(var z=0;z<weightArr.length;z++){
+							if(z===0){
+								myQ += '<option id="woption0" value="">'+weightArr[z]+'</option>';
+							} else {
+								var thisWeightSetArr = new Array();
+								var thisWeightSetArr2 = new Array();
+								
+								if(z===1){
+									var woptsetindex = z+2;
+								} else {
+									woptsetindex = woptsetindex+2;
+								}
+								
+								thisWeightSetArr = weightArr[z].split(";");
+								thisWeightSetArr2 = weightArr2[z].split(";")
+								//console.log(thisWeightSetArr);
+								for(var w=0;w<4;w++){
+									switch(w){
+										case 0:
+											myQ += '<option class="allweight weightset'+woptsetindex+'" value="'+thisWeightSetArr[0]+'">'+thisWeightSetArr[0]+'</option>';
+											myQ += '<option class="allweight asianweightset'+woptsetindex+'" value="'+thisWeightSetArr2[0]+'">'+thisWeightSetArr2[0]+'</option>';
+											break;
+										case 1:	
+											myQ += '<option class="allweight weightset'+woptsetindex+'" value="'+thisWeightSetArr[1]+'">'+thisWeightSetArr[1]+'</option>';
+											myQ += '<option class="allweight asianweightset'+woptsetindex+'" value="'+thisWeightSetArr2[1]+'">'+thisWeightSetArr2[1]+'</option>';
+											break;
+										case 2: 
+											myQ += '<option class="allweight weightset'+woptsetindex+'" value="'+thisWeightSetArr[2]+'">'+thisWeightSetArr[2]+'</option>';
+											myQ += '<option class="allweight asianweightset'+woptsetindex+'" value="'+thisWeightSetArr2[2]+'">'+thisWeightSetArr2[2]+'</option>';
+											break;
+										case 3:
+											myQ += '<option class="allweight weightset'+woptsetindex+'" value="'+thisWeightSetArr[3]+'">'+thisWeightSetArr[3]+'</option>';
+											myQ += '<option class="allweight asianweightset'+woptsetindex+'" value="'+thisWeightSetArr2[3]+'">'+thisWeightSetArr2[3]+'</option>';
+											break;
+									}
+									
+								}
+								//myQ += '<option value="'+weightArr[z]+'">'+weightArr[z]+'</option>';
+							}
+
+						}
+						
+					
+						
+						
+						
+						myQ += '</select></div>';
+						myQ += '<div style="clear:both;height:1px;">&nbsp;</div></div>';
+					}
+				}
+				
+				if(qitem.qid==='9'){
+					myQ += '<div class="row">';
+					myQ += '<div class="col-md-12 alert alert-danger" id="emailcheckmsg"></div><div style="clear:both;height:1px;">&nbsp;</div>';
+					myQ += '<div class="col-md-6"><input type="text" id="myemail" placeholder="'+qitem.placeholders.placeholder0+'" /></div><div class="col-md-6"><input type="text" id="myzip" placeholder="'+qitem.placeholders.placeholder1+'" /></div>';
+					myQ += '<div style="clear:both;height:1px;">&nbsp;</div></div>';
+					
+					//gdpr					
+					myQ += '<div class="row"><div class="col-md-12">';
+					myQ += '<select name="cons_country" id="cons_country" size="1"><option value="">'+qitem.placeholders.placeholder3+'</option><option selected="selected" value="United States">United States</option><option value="Afghanistan">Afghanistan</option><option value="Aland Islands">Aland Islands</option><option value="Albania">Albania</option><option value="Algeria">Algeria</option><option value="American Samoa">American Samoa</option><option value="Andorra">Andorra</option><option value="Angola">Angola</option><option value="Anguilla">Anguilla</option><option value="Antarctica">Antarctica</option><option value="Antigua and Barbuda">Antigua and Barbuda</option><option value="Argentina">Argentina</option><option value="Armenia">Armenia</option><option value="Aruba">Aruba</option><option value="Australia">Australia</option><option value="Austria">Austria</option><option value="Azerbaijan">Azerbaijan</option><option value="Bahamas">Bahamas</option><option value="Bahrain">Bahrain</option><option value="Bangladesh">Bangladesh</option><option value="Barbados">Barbados</option><option value="Belarus">Belarus</option><option value="Belgium">Belgium</option><option value="Belize">Belize</option><option value="Benin">Benin</option><option value="Bermuda">Bermuda</option><option value="Bhutan">Bhutan</option><option value="Bolivarian Republic of Venezuela">Bolivarian Republic of Venezuela</option><option value="Bonaire, Sint Eustatios and Saba">Bonaire, Sint Eustatios and Saba</option><option value="Bosnia and Herzegovina">Bosnia and Herzegovina</option><option value="Botswana">Botswana</option><option value="Bouvet Island">Bouvet Island</option><option value="Brazil">Brazil</option><option value="British Indian Ocean Territory">British Indian Ocean Territory</option><option value="Brunei Darussalam">Brunei Darussalam</option><option value="Bulgaria">Bulgaria</option><option value="Burkina Faso">Burkina Faso</option><option value="Burundi">Burundi</option><option value="Cambodia">Cambodia</option><option value="Cameroon">Cameroon</option><option value="Canada">Canada</option><option value="Cape Verde">Cape Verde</option><option value="Cayman Islands">Cayman Islands</option><option value="Central African Republic">Central African Republic</option><option value="Chad">Chad</option><option value="Chile">Chile</option><option value="China">China</option><option value="Christmas Island">Christmas Island</option><option value="Cocos (Keeling) Islands">Cocos (Keeling) Islands</option><option value="Colombia">Colombia</option><option value="Comoros">Comoros</option><option value="Congo">Congo</option><option value="Cook Islands">Cook Islands</option><option value="Costa Rica">Costa Rica</option><option value="Cote D\'Ivoire">Cote D\'Ivoire</option><option value="Croatia">Croatia</option><option value="Cuba">Cuba</option><option value="Curacao">Curacao</option><option value="Cyprus">Cyprus</option><option value="Czech Republic">Czech Republic</option><option value="Democratic People\'s Republic of Korea">Democratic People\'s Republic of Korea</option><option value="The Democratic Republic of the Congo">The Democratic Republic of the Congo</option><option value="Denmark">Denmark</option><option value="Djibouti">Djibouti</option><option value="Dominica">Dominica</option><option value="Dominican Republic">Dominican Republic</option><option value="Ecuador">Ecuador</option><option value="Egypt">Egypt</option><option value="El Salvador">El Salvador</option><option value="Equatorial Guinea">Equatorial Guinea</option><option value="Eritrea">Eritrea</option><option value="Estonia">Estonia</option><option value="Ethiopia">Ethiopia</option><option value="Falkland Islands (Malvinas)">Falkland Islands (Malvinas)</option><option value="Faroe Islands">Faroe Islands</option><option value="Federated States of Micronesia">Federated States of Micronesia</option><option value="Fiji">Fiji</option><option value="Finland">Finland</option><option value="The Former Yugoslav Republic of Macedonia">The Former Yugoslav Republic of Macedonia</option><option value="France">France</option><option value="French Guiana">French Guiana</option><option value="French Polynesia">French Polynesia</option><option value="French Southern Territories">French Southern Territories</option><option value="Gabon">Gabon</option><option value="Gambia">Gambia</option><option value="Georgia">Georgia</option><option value="Germany">Germany</option><option value="Ghana">Ghana</option><option value="Gibraltar">Gibraltar</option><option value="Greece">Greece</option><option value="Greenland">Greenland</option><option value="Grenada">Grenada</option><option value="Guadeloupe">Guadeloupe</option><option value="Guam">Guam</option><option value="Guatemala">Guatemala</option><option value="Guernsey">Guernsey</option><option value="Guinea">Guinea</option><option value="Guinea-Bissau">Guinea-Bissau</option><option value="Guyana">Guyana</option><option value="Haiti">Haiti</option><option value="Heard Island and McDonald Islands">Heard Island and McDonald Islands</option><option value="Holy See (Vatican City State)">Holy See (Vatican City State)</option><option value="Honduras">Honduras</option><option value="Hong Kong">Hong Kong</option><option value="Hungary">Hungary</option><option value="Iceland">Iceland</option><option value="India">India</option><option value="Indonesia">Indonesia</option><option value="Iraq">Iraq</option><option value="Ireland">Ireland</option><option value="Islamic Republic of Iran">Islamic Republic of Iran</option><option value="Isle of Man">Isle of Man</option><option value="Israel">Israel</option><option value="Italy">Italy</option><option value="Jamaica">Jamaica</option><option value="Japan">Japan</option><option value="Jersey">Jersey</option><option value="Jordan">Jordan</option><option value="Kazakhstan">Kazakhstan</option><option value="Kenya">Kenya</option><option value="Kiribati">Kiribati</option><option value="Kuwait">Kuwait</option><option value="Kyrgyzstan">Kyrgyzstan</option><option value="Laos People\'s Democratic Republic">Laos People\'s Democratic Republic</option><option value="Latvia">Latvia</option><option value="Lebanon">Lebanon</option><option value="Lesotho">Lesotho</option><option value="Liberia">Liberia</option><option value="Libya">Libya</option><option value="Liechtenstein">Liechtenstein</option><option value="Lithuania">Lithuania</option><option value="Luxembourg">Luxembourg</option><option value="Macao">Macao</option><option value="Madagascar">Madagascar</option><option value="Malawi">Malawi</option><option value="Malaysia">Malaysia</option><option value="Maldives">Maldives</option><option value="Mali">Mali</option><option value="Malta">Malta</option><option value="Marshall Islands">Marshall Islands</option><option value="Martinique">Martinique</option><option value="Mauritania">Mauritania</option><option value="Mauritius">Mauritius</option><option value="Mayotte">Mayotte</option><option value="Mexico">Mexico</option><option value="Monaco">Monaco</option><option value="Mongolia">Mongolia</option><option value="Montenegro">Montenegro</option><option value="Montserrat">Montserrat</option><option value="Morocco">Morocco</option><option value="Mozambique">Mozambique</option><option value="Myanmar">Myanmar</option><option value="Namibia">Namibia</option><option value="Nauru">Nauru</option><option value="Nepal">Nepal</option><option value="Netherlands">Netherlands</option><option value="New Caledonia">New Caledonia</option><option value="New Zealand">New Zealand</option><option value="Nicaragua">Nicaragua</option><option value="Niger">Niger</option><option value="Nigeria">Nigeria</option><option value="Niue">Niue</option><option value="Norfolk Island">Norfolk Island</option><option value="Northern Mariana Islands">Northern Mariana Islands</option><option value="Norway">Norway</option><option value="Oman">Oman</option><option value="Pakistan">Pakistan</option><option value="Palau">Palau</option><option value="Palestinian Territory">Palestinian Territory</option><option value="Panama">Panama</option><option value="Papua New Guinea">Papua New Guinea</option><option value="Paraguay">Paraguay</option><option value="Peru">Peru</option><option value="Philippines">Philippines</option><option value="Pitcairn">Pitcairn</option><option value="Plurinational State of Bolivia">Plurinational State of Bolivia</option><option value="Poland">Poland</option><option value="Portugal">Portugal</option><option value="Puerto Rico">Puerto Rico</option><option value="Qatar">Qatar</option><option value="Republic of Korea">Republic of Korea</option><option value="Republic of Moldova">Republic of Moldova</option><option value="Reunion">Reunion</option><option value="Romania">Romania</option><option value="Russian Federation">Russian Federation</option><option value="Rwanda">Rwanda</option><option value="Saint Barthelemy">Saint Barthelemy</option><option value="Saint Helena, Ascension and Tristan da Cunha">Saint Helena, Ascension and Tristan da Cunha</option><option value="Saint Kitts and Nevis">Saint Kitts and Nevis</option><option value="Saint Lucia">Saint Lucia</option><option value="Saint Martin (French)">Saint Martin (French)</option><option value="Saint Pierre and Miquelon">Saint Pierre and Miquelon</option><option value="Saint Vincent and the Grenadines">Saint Vincent and the Grenadines</option><option value="Samoa">Samoa</option><option value="San Marino">San Marino</option><option value="Sao Tome and Principe">Sao Tome and Principe</option><option value="Saudi Arabia">Saudi Arabia</option><option value="Senegal">Senegal</option><option value="Serbia">Serbia</option><option value="Seychelles">Seychelles</option><option value="S. Georgia &amp; S. Sandwich Isls.">S. Georgia &amp; S. Sandwich Isls.</option><option value="Sierra Leone">Sierra Leone</option><option value="Singapore">Singapore</option><option value="Sint Maarten (Dutch)">Sint Maarten (Dutch)</option><option value="Slovakia">Slovakia</option><option value="Slovenia">Slovenia</option><option value="Solomon Islands">Solomon Islands</option><option value="Somalia">Somalia</option><option value="South Africa">South Africa</option><option value="South Sudan">South Sudan</option><option value="Spain">Spain</option><option value="Sri Lanka">Sri Lanka</option><option value="Sudan">Sudan</option><option value="Suriname">Suriname</option><option value="Svalbard and Jan Mayen">Svalbard and Jan Mayen</option><option value="Swaziland">Swaziland</option><option value="Sweden">Sweden</option><option value="Switzerland">Switzerland</option><option value="Syrian Arab Republic">Syrian Arab Republic</option><option value="Taiwan, Province of China">Taiwan, Province of China</option><option value="Tajikistan">Tajikistan</option><option value="Thailand">Thailand</option><option value="Timor-Leste">Timor-Leste</option><option value="Togo">Togo</option><option value="Tokelau">Tokelau</option><option value="Tonga">Tonga</option><option value="Trinidad and Tobago">Trinidad and Tobago</option><option value="Tunisia">Tunisia</option><option value="Turkey">Turkey</option><option value="Turkmenistan">Turkmenistan</option><option value="Turks and Caicos Islands">Turks and Caicos Islands</option><option value="Tuvalu">Tuvalu</option><option value="Uganda">Uganda</option><option value="Ukraine">Ukraine</option><option value="United Arab Emirates">United Arab Emirates</option><option value="United Kingdom">United Kingdom</option><option value="United Republic of Tanzania">United Republic of Tanzania</option><option value="Uruguay">Uruguay</option><option value="USA Minor Outlying Islands">USA Minor Outlying Islands</option><option value="Uzbekistan">Uzbekistan</option><option value="Vanuatu">Vanuatu</option><option value="Viet Nam">Viet Nam</option><option value="Virgin Islands (British)">Virgin Islands (British)</option><option value="Virgin Islands (USA)">Virgin Islands (USA)</option><option value="Wallis and Futuna">Wallis and Futuna</option><option value="Western Sahara">Western Sahara</option><option value="Yemen">Yemen</option><option value="Zambia">Zambia</option><option value="Zimbabwe">Zimbabwe</option></select>';
+					myQ += '</div><div style="clear:both;height:1px;">&nbsp;</div></div>';				
+					myQ += '<div class="row" id="myGDPRDiv" style="display:none;"><div class="col-md-12" style="font-size: 16px;font-weight: bold;margin: 8px 0;"><input type="checkbox" class="biggercb" id="myGDPR" name="myGDPR" value="1"> &nbsp;'+qitem.placeholders.placeholder4+'</div><div style="clear:both;height:1px;">&nbsp;</div></div>';
+					//gdpr
+					
+					
+					
+					myQ +='<div class="row" id="myOptinDiv" style="display:none;"><div class="col-md-12" style="font-size: 16px;font-weight: bold;margin: 8px 0;"><input type="checkbox" class="biggercb" id="myOptin" name="myOptin" value="yes" checked> &nbsp;'+qitem.placeholders.placeholder2+'</div></div>';
+					
+					myQ += '<div style="clear:both;height:1px;">&nbsp;</div>';
+					myQ += '<div class="row"><div class="col-md-6" style="vertical-align:top;"><a id="submitBtn0" class="redbtn">'+submitBtn0+'</a></div><div class="col-md-6" style="vertical-align:top;"><a id="submitBtn1" class="bluebtn">'+submitBtn1+'</a></div></div>';
+					myQ += '<div style="clear:both;height:1px;">&nbsp;</div>';
+					
+				}
+				
+				//console.log(qitem.qid+' : '+acount);
+				
+				if(qitem.questionlayout==='1col'){
+					myQ += '<div style="clear:both;height:65px">&nbsp;</div>';
+					myQ += '</div>'; //closing inline div for q1
+				} else {
+					if(qitem.subquestion){						
+						myQ += '<div style="clear:both;height:20px;">&nbsp;</div><p class="subQuestionText" id="subquestion'+qitem.qid+'">'+qitem.subquestion+'</p><div style="clear:both;height:20px;">&nbsp;</div>';
+						if(qitem.subanswers){
+							subQforAVal = qitem.subQforA;
+							$.each(qitem.subanswers, function(subAnswerLabel, subAnswerVal){
+								sacount++;
+								if(!isEven(sacount)){
+										myQ += '<div class="row">';
+									}
+								myQ += '<div class="col-md-6 subquestionboxes"><a id="sq'+qitem.qid+subAnswerLabel+'" class="redbtn subanswers text-center" onClick="handleSubAnswer(\'sq'+qitem.qid+subAnswerLabel+'\');">'+subAnswerVal+'</a></div>';
+								if(isEven(sacount)){
+									myQ += '<div style="clear:both;height:1px;">&nbsp;</div>';	
+									myQ += '</div>';
+								}
+							});
+						}
+					}
+					/*if(qitem.qid === '7'){
+						myQ += '<div style="clear:both;height:45px">&nbsp;</div><div class="navigationboxes"><div class="row"><div class="col-xs-3"><a class="navbuttons" id="backBtn'+qitem.qid+'" onClick="showPage(\'backBtn'+qitem.qid+'\');"><img src="../ws/risktest/img/back-arrow.png" border="0" /></a></div><div class="col-xs-9 text-right"><a class="bluebtn" onClick="handleCBAnswer(7);">'+data.configGeneral.nextBtnLabel+' &nbsp;<i class="fa fa-arrow-right" aria-hidden="true"></i></a></div></div></div></div></div><div class="col-md-4 hidden-xs hidden-sm hintboxes equalheight"><center><img id="q'+qitem.qid+'img" src="'+qitem.hintImage+'" class="qicons" /></center>';
+					} else if(qitem.qid === '8'){*/
+					
+					if(qitem.qid === '8'){	
+				
+						myQ += '<div style="clear:both;height:45px">&nbsp;</div><div class="navigationboxes"><div class="row"><div class="col-xs-3"><a class="navbuttons" id="backBtn'+qitem.qid+'" onClick="showPage(\'backBtn'+qitem.qid+'\');"><img src="../ws/risktest/img/back-arrow.png" border="0" /></a></div><div class="col-xs-9 text-right"><a id="nextBtn8" class="bluebtn" onClick="showNextPage(\'nextBtn9\');">'+data.configGeneral.nextBtnLabel+' &nbsp;<i class="fa fa-arrow-right" aria-hidden="true"></i></a></div></div></div></div></div><div class="col-md-4 hidden-xs hidden-sm hintboxes equalheight"><center><img id="q'+qitem.qid+'img" src="'+qitem.hintImage+'" class="qicons" /></center>';
+					} else {										
+myQ += '<div style="clear:both;height:45px">&nbsp;</div><div class="navigationboxes"><a class="navbuttons" id="backBtn'+qitem.qid+'" onClick="showPage(\'backBtn'+qitem.qid+'\');"><img src="../ws/risktest/img/back-arrow.png" border="0" /></a></div></div></div><div class="col-md-4 hidden-xs hidden-sm hintboxes equalheight"><center><img id="q'+qitem.qid+'img" src="'+qitem.hintImage+'" class="qicons" /></center>';
+}
+
+
+					if(qitem.hintStatus === 'y'){
+						//myQ +='<div id="hint'+qitem.qid+'" class="hintcontents"><p>'+qitem.hintDesc+'</p></div></div></div>';
+						myQ += '</div></div>';
+					}
+					myQ += '<div style="clear:both;height:1px;">&nbsp;</div>';					
+				}			
+				
+				myQ += '</div>'; //closing questionnairebox
+				
+				renderQ.append(myQ);
+				counter++;
+			});
+			
+			//renderQ.append('<div class="text-center"><a class="navbtn" id="submitBtn">'+submitBtn+'</div>');
+		})
+		.done(function(){
+			//console.log('second success');
+			initSetup();
+		})
+		.fail(function(){
+			//console.log('error');
+		})
+		.always(function(){
+			//console.log('complete');
+		});
+		
+		jqxhr.complete(function(){
+			//console.log('complete');
+		})	
+		
+				
+	});
+		
+	function initSetup(){
+		$('.questionnairebox').hide();
+		$('.hintcontents').hide();
+		$('.paginatorbars').hide();
+		$('.subQuestionText').hide();
+		$('.subquestionboxes').hide();		
+		$('.questionnairebox').first().show();	
+		$('.allweight').hide();
+		$('#nextBtn8').hide();
+		totalQuestions = $('.questionnairebox').length;		
+		//console.log(typeof totalQuestions);	
+		
+		noscore = noscore.filter(Boolean);
+		//console.log('noscore question array indicator :'+noscore);
+		
+		if(inIframe()===false){
+			$('#ADALogo').show();
+		} else {
+			if(urlRef != ''){
+				//get the domain base of the referrer
+				baseURL =  urlRef.match(/:\/\/(.[^/]+)/)[1];
+				console.log(baseURL);
+				if(baseURL.indexOf('diabetes.org')===-1){
+					$('#ADALogo').show();
+				}
+			} else {
+				$('#ADALogo').show();
+			}
+		}
+		
+		$('#cons_country').on('change',function(){
+			checkMYGDPR();
+		});
+		
+		$('#cons_country2').on('change',function(){
+			checkMYGDPR('2');
+		});
+		
+		$('#submitBtn0').on('click', function(){
+			
+			myEmail = $('#myemail').val();			
+			myZip = $('#myzip').val();
+			
+			if((myEmail ==='')||(typeof myEmail === 'undefined')){
+				$('#emailcheckmsg').text('Please provide an email address');
+				$('#emailcheckmsg').show();
+				setTimeout(function(){ $('#emailcheckmsg').hide(); }, 3000);
+			} else {
+				if(ValidateEmail(myEmail)){
+					processScore(1);				
+				}
+			}
+		});
+		
+		$('#submitBtn1').on('click', function(){
+			myEmail = $('#myemail').val();
+			myZip = $('#myzip').val();
+			
+			processScore(2);
+		});
+		
+		$('#dbnav').click(function(){
+		openContent('diabetesbasic');
+		});
+		$('#sthlnav').click(function(){
+		openContent('sthl');
+		});
+		$('#sylonav').click(function(){
+		openContent('helpothers');
+		});
+		$('#ginav').click(function(){
+		openContent('getinvolved');
+		});
+
+		$('#rdnav').click(function(){
+		openContent('recentlydiagnosed');		
+		});
+		$('#dppnav').click(function(){		
+		openContent('dpprogram');
+		});
+		
+		$('#dbhnav').click(function(){
+		openContent('diabetesbasic2');
+		});
+		$('#henav').click(function(){
+		openContent('healthyeating');
+		});
+		$('#penav').click(function(){
+		openContent('physicalexercise');
+		});
+		
+		$('.equalheight').matchHeight();
+		
+	}
+	
+	function toggleHint(whichHint){
+		$('#hint'+whichHint).toggle();
+	}
+	
+	function processScore(whichSubmit){		
+		totalScore = 0;
+		
+		if(answerValArr[2].indexOf('Woman')!= -1){
+			var ggRaw = answerValArr[2].split('|');
+			var myGender = ggRaw[0];
+			var myGest = ggRaw[1];
+		} else {
+			var myGender = answerValArr[2];
+			var myGest = "";
+		}
+		
+		
+		for(var g=0;g<answerScoreArr.length;g++){
+			totalScore = totalScore + parseInt(answerScoreArr[g]);
+			//review answer rendering handler
+
+
+
+			var qnum = g+1;
+			if((g===1)||(g===3)||(g===4)||(g===5)||(g===7)){				
+				$('#q'+qnum+'a'+answerScoreArr[g]).show();
+			  }
+			if(g===2){
+				if((myGender==='Woman')&&(myGest==='Yes')){
+					$('#q'+qnum+'a0-'+answerScoreArr[g]).show();
+					$('#womandesc').show();
+				} else if ((myGender==='Woman')&&(myGest==='No')){
+					$('#q'+qnum+'a0-'+answerScoreArr[g]).show();
+					$('#womandesc').show();
+				} else {
+					$('#q'+qnum+'a'+answerScoreArr[g]).show();
+					$('#mandesc').show();
+				}
+			}			
+		}
+		//alert('total score is :'+totalScore);
+		
+		$('#resultbox').show();
+		$('#relatedinfo').show();
+$('#adahotline').show();
+		$('.questionnairebox').hide();
+		$('#mytotalscoreval').text(totalScore);
+		
+		if(totalScore >=5){
+			$('.highresults').show();
+			$('.lowresults').hide();
+			$('#mytotalscoreval').css('color','#C92E36');
+			//var isHigh=true;
+var isHigh='yes';
+var isLow='no';
+			//var isLow=false;
+		} else {
+			$('.lowresults').show();
+			$('.highresults').hide();
+			$('#mytotalscoreval').css('color','#8ff442');
+			//var isHigh=false;
+			//var isLow=true;
+var isHigh='no';
+var isLow='yes'
+		}
+		for(var p=1;p<=totalScore;p++){
+				$('#greybox'+p).hide();
+			}
+		
+		if($('#myOptin').is(':checked')){
+				var mycurroptin = 'yes';
+				var optinnum = '1';
+			} else {
+				var mycurroptin = 'no';
+				var optinum = '0';
+			}		
+			//console.log(mycurroptin);
+
+			var today = new Date();
+			var dd = today.getDate();
+			var mm = today.getMonth()+1;
+			var yyyy = today.getFullYear();
+			
+			if(dd<10){
+				dd='0'+dd;
+			} 
+			if(mm<10){
+				mm='0'+mm;
+			}
+			
+			//today = mm+'/'+dd+'/'+yyyy;
+			//var rawtoday = yyyy+'-'+mm+'-'+dd;
+			//ISOdate
+			//var today = moment(rawtoday,"YYYY-MM-DD");
+		    lrtdate = yyyy+"-"+(mm)+"-"+(dd);
+			var today2 = yyyy+'-'+mm+'-'+dd;
+		
+		
+
+		var bmiRaw = answerValArr[7].split('|');
+		var myHeight = bmiRaw[0];
+		var myWeightSet = bmiRaw[1];
+		
+		var mygdprconsent;
+		if($('#myGDPR').is(':checked')){
+			mygdprconsent='1';
+		} else {
+			mygdprconsent='';
+		}
+		
+		var myGDPRCountry = $('#cons_country').val();
+		
+		if(whatLoc==='null'){
+			$.ajax({
+					type       : 'POST',
+					url        : adaapiurl,					
+					crossDomain: true,
+					beforeSend : function(xhr) {},
+					complete   : function() {},
+					data       : {
+						  "age_range": answerValArr[1],						 
+						  "gender": myGender,
+						  "gestational": myGest,
+						  "family_history": answerValArr[3],
+						  "ethnicity": answerValArr[6],
+						  "high_blood_pressure": answerValArr[4],
+						  "active": answerValArr[5],
+						  "height": myHeight,
+						  "weight_range": myWeightSet,
+						  "source": whatSource,						  
+						  "scorereported": totalScore,						  
+						  "testdate": today2,						  
+						  "zip": myZip,						  
+						  "optin": optinnum,
+						  "emailaddress": myEmail,
+						  "lang": whatLang,						  
+						  "testfor": answerValArr[0],
+						  //"access_token":atokval,
+						  "GDPR_Consent":mygdprconsent,
+						  "country":myGDPRCountry,
+						  "category": whatCat
+					},
+					dataType   : 'json',    
+					success    : function(data, textStatus, jqXHR) {       
+						console.log('success');
+						//console.log(data);
+						//console.log(jqXHR);
+						recordID = data;
+						console.log('typeof recordID: '+typeof recordID);
+					},
+					error      : function(jqXHR, textStatus, errorThrown ) {
+				 		console.log('error');	  
+					 
+					} // end error
+			  });//end ajax	
+		} else {
+			$.ajax({
+					type       : 'POST',
+					url        : adaapiurl,					
+					crossDomain: true,
+					beforeSend : function(xhr) {},
+					complete   : function() {},
+					data       : {
+						  "age_range": answerValArr[1],						 
+						  "gender": myGender,
+						  "gestational": myGest,
+						  "family_history": answerValArr[3],
+						  "ethnicity": answerValArr[6],
+						  "high_blood_pressure": answerValArr[4],
+						  "active": answerValArr[5],
+						  "height": myHeight,
+						  "weight_range": myWeightSet,
+						  "source": whatSource,						  
+						  "scorereported": totalScore,						  
+						  "testdate": today2,						  
+						  "zip": myZip,						  
+						  "optin": optinnum,
+						  "emailaddress": myEmail,
+						  "lang": whatLang,						  
+						  "testfor": answerValArr[0],
+						  "location": whatLoc,
+						  //"access_token":atokval,
+						  "GDPR_Consent":mygdprconsent,
+						  "country":myGDPRCountry,
+						  "category": whatCat
+					},
+					dataType   : 'json',    
+					success    : function(data, textStatus, jqXHR) {       
+						console.log('success');
+						//console.log(data);
+						//console.log(jqXHR);
+						recordID = data;
+						console.log('typeof recordID: '+typeof recordID);
+					},
+					error      : function(jqXHR, textStatus, errorThrown ) {
+				 		console.log('error');	  
+					 
+					} // end error
+			  });//end ajax	
+		}
+		
+		
+
+		
+		
+		if(whichSubmit===1){			
+			
+			MktoForms2.whenReady(function (form) {			
+				//note only submit riskHigh or riskLow not both
+				if(totalScore >=5){
+					form.vals({
+					"Email":myEmail,
+					"PostalCode":myZip,
+					"accept_email":mycurroptin,
+					"riskScore":totalScore,
+					"riskHigh":isHigh,					
+					"lastRiskTestDate":lrtdate				
+					});
+				} else {
+					form.vals({
+					"Email":myEmail,
+					"PostalCode":myZip,
+					"accept_email":mycurroptin,
+					"riskScore":totalScore,
+					"riskLow":isLow,					
+					"lastRiskTestDate":lrtdate				
+					});
+				}
+				
+				
+				form.submit();
+				form.onSuccess(function(){
+                    hasEmailed=1;
+					$('.notyetemailed').hide();
+					$('#alreadysignedupmsg').show();
+					return false;
+				});
+			
+			});
+						
+			
+		} //email my result Marketo
+		
+		
+		
+		if(hasEmailed===0){
+			$('.notyetemailed').show();
+			$('#emailResult').show();
+			$('#alreadysignedupmsg').hide();
+			if(whichSubmit===2){
+				checkMYGDPR('2');
+			}
+		} else{
+			$('.notyetemailed').hide();
+			$('#alreadysignedupmsg').show();
+		}
+
+		$("html,body", window.parent.document).scrollTop(0);
+
+	}
+
+function signUp(){
+	
+	if($('#myOptin2').is(':checked')){
+				var mycurroptin2 = 'yes';
+				var mycurroptinnum2 = "1";
+			} else {
+				var mycurroptin2 = 'no';
+				var mycurroptinnum2 = "0";
+			}	
+	if(totalScore >=5){
+		//var isHigh2 = true;
+		//var isLow2 = false;
+var isHigh2 = 'yes';
+var isLow2 = 'no';
+	} else {
+		//var isHigh2 = false;
+		//var isLow2 = true;
+var isHigh2 = 'no';
+var isLow2 = 'yes';
+	}
+	if($('#myemail2').val() ===''){
+		$('#emailcheckmsg2').text('Please provide an email address');
+		$('#emailcheckmsg2').show();
+		setTimeout(function(){ $('#emailcheckmsg2').hide(); }, 3000);
+	} else {
+	if(ValidateEmail($('#myemail2').val(),'2')){
+		MktoForms2.whenReady(function (form) {		
+			
+			//revise only submit one of the score not both high and low
+			if(totalScore >=5){
+				form.vals({
+						"Email":$('#myemail2').val(),
+						"PostalCode":$('#myzip2').val(),
+						"accept_email":mycurroptin2,
+						"riskScore":totalScore,
+						"riskHigh":isHigh2,						
+						"lastRiskTestDate":lrtdate				
+					});
+			} else {
+				form.vals({
+						"Email":$('#myemail2').val(),
+						"PostalCode":$('#myzip2').val(),
+						"accept_email":mycurroptin2,
+						"riskScore":totalScore,						
+						"riskLow":isLow2,
+						"lastRiskTestDate":lrtdate				
+					});
+			}
+
+					
+
+					form.submit();
+					form.onSuccess(function(){
+						hasEmailed=1;
+						$('#alreadysignedupmsg').show();
+						$('.notyetemailed').hide();
+						return false;
+					});
+
+				});
+		
+		//Update API
+		if(typeof recordID !="undefined"){
+			console.log('running PUT to update email optin');
+			
+			var mygdprconsent2;
+			if($('#myGDPR2').is(':checked')){
+				mygdprconsent2='1';
+			} else {
+				mygdprconsent2='';
+			}
+			var myGDPRCountry2 = $('#cons_country2').val();
+			
+			$.ajax({
+						type       : 'PUT',
+						url        : adaapiurl+'/'+recordID,					
+						crossDomain: true,
+						beforeSend : function(xhr) {},
+						complete   : function() {},
+						data       : {
+							  //"id": recordID,
+							  "emailaddress": $('#myemail2').val(),
+							  "zip": $('#myzip2').val(),
+							  "optin": mycurroptinnum2,
+							  //"access_token":atokval,
+							  "GDPR_Consent":mygdprconsent2,
+							  "country": myGDPRCountry2
+							  
+						},
+						dataType   : 'json',    
+						success    : function(data, textStatus, jqXHR) {       
+							console.log('success');						
+						},
+						error      : function(jqXHR, textStatus, errorThrown ) {
+							console.log('error');	  
+
+						} // end error
+				  });//end ajax	
+		  }
+		}
+	}
+	
+}
+
+function showWeightRange(whichQuestion){
+		//if asian
+		/*if(selectedAnswers[6]===1){
+			//console.log('asian selected previously');
+			isAsian = 1;
+		}else{
+			isAsian = 0;
+		}*/
+	
+	//IE retighten
+	$('#qweight'+whichQuestion).prop('disabled',false);
+	
+		if(allWeightOptions.length === 0){
+			allWeightOptions = $('.allweight').detach();
+		}
+								
+		//console.log(allWeightOptions);
+		//console.log(allWeightOptions[3]);
+		//console.log(allWeightOptions.length);
+		//console.log(allWeightOptions[3].classList[1]);
+	
+		$('.allweight').hide();
+		//$(".allweight").prop('disabled', true);		
+		
+		$('#qweight'+whichQuestion).val($('#qweight'+whichQuestion+' option:first').val());	
+		
+		
+		var whatWeightSet = $('#qheight'+whichQuestion+' option:selected').prop('id');
+		var wwsnum = whatWeightSet.replace("hoption","");		
+		
+		wwsnum = parseInt(wwsnum);
+		wwsnum = wwsnum+1;
+		
+		if(isAsian===1){
+			var wwsstring = 'asianweightset'+wwsnum;
+		} else {
+			var wwsstring = 'weightset'+wwsnum;
+		}
+		
+	    
+		
+		$('.allweight').detach();
+						
+		for(var k=0;k<allWeightOptions.length;k++){
+			if(allWeightOptions[k].classList[1]===wwsstring){				
+				$('#qweight'+whichQuestion).append(allWeightOptions[k].outerHTML);
+			}
+		}
+		
+		
+		//console.log(wwsnum);
+	if(isAsian===1){
+		$('.asianweightset'+wwsnum).show();
+	} else {
+		$('.weightset'+wwsnum).show();
+		//$('.weightset'+wwsnum).prop('disabled', false);
+	}
+		
+	
+	if(($('#qheight8').val()!='')&&($('#qweight8').val()!='')){
+			$('#nextBtn8').show();
+		} else {
+			$('#nextBtn8').hide();
+		}
+}
+
+function processBMI(whichQuestion){
+		var myH = decodeURI($('#qheight'+whichQuestion).val());
+
+		//console.log(decodeURI($('#qheight'+whichQuestion).val()));
+		//console.log($('#qweight'+whichQuestion).val());
+		//console.log($('#qweight'+whichQuestion).prop('selectedIndex'));
+		var myW = $('#qweight'+whichQuestion).val();
+		var swoi = parseInt($('#qweight'+whichQuestion).prop('selectedIndex'));
+		
+		if(myW != ''){
+			if(myW.indexOf('<')!=-1){
+				var bmiscore=0;
+			} else if (myW.indexOf('-')!=-1){
+				//modulo 2 or not
+				//console.log(swoi);
+				if(swoi % 2 === 0){
+					var bmiscore= 1;
+				} else {
+					var bmiscore = 2;
+				}
+
+			} else {
+				if(myW.indexOf('+')!=-1){
+					var bmiscore = 3;
+				}
+			} 
+			//console.log(bmiscore);
+			arrIndex = whichQuestion-1;
+			//answerValArr[arrIndex]=myH+'|'+myW;
+			
+			//rev for API submission validation
+			var hcutpos = myH.indexOf(' (');
+			myH = myH.substr(0,hcutpos);
+			var wcutpos = myW.indexOf(' lbs.');
+			myW = myW.substr(0,wcutpos);
+			answerValArr[arrIndex] = myH+'|'+myW;
+		
+			console.log('Answered Text Array:');
+			console.log(answerValArr);
+
+
+			selectedAnswers[arrIndex]=0;
+			//console.log('Answered Button Location Index Array:');
+			//console.log(selectedAnswers);
+
+			if(noscore[arrIndex]!='y'){
+					answerScoreArr[arrIndex] = bmiscore;
+			} else {
+					answerScoreArr[arrIndex] = 0 ;
+			}
+
+			console.log('Answered Score Array:');
+			console.log(answerScoreArr);
+
+			currLoc = whichQuestion;
+			prevLoc = currLoc;		
+			$('#question'+prevLoc).hide();
+			if($('#paginator'+prevLoc).length){
+				$('#paginator'+prevLoc).hide();
+			}
+
+			//update currLoc to next
+			currLoc = currLoc+1;
+			$('#question'+currLoc).show();
+
+			if($('#paginator'+currLoc).length){			
+				$('#paginator'+currLoc).show();
+			}
+		} else {
+			$('#nextBtn8').hide();
+		}	
+	}
+	
+	function handleCBAnswer(whichQuestion){
+		arrIndex = whichQuestion-1;
+		if($('input[name="qcb'+whichQuestion+'"]:checked').length===0){
+			alert('please select an answer');
+		} else {
+			var checkedbcounter=1;
+			$('input[name="qcb'+whichQuestion+'"]:checked').each(function() {
+				//console.log(this.value);
+				if(checkedbcounter===1){
+				answerValArr[arrIndex] = this.value;
+				}else {
+				answerValArr[arrIndex] += this.value;
+				}
+				if(checkedbcounter < $('input[name="qcb'+whichQuestion+'"]:checked').length){
+				answerValArr[arrIndex] += '|';
+				}
+				checkedbcounter++;
+				//console.log('Answered Text Array:');
+				//console.log(answerValArr);
+			});
+			
+			selectedAnswers[arrIndex]=0;
+			//console.log('Answered Button Location Index Array:');
+			//console.log(selectedAnswers);
+			
+			//if((currLoc!=1)&&(currLoc!=9)&&(currLoc!=7)){}
+			if(noscore[arrIndex]!='y'){
+				answerScoreArr[arrIndex] = parseInt(whA);
+			} else {
+				answerScoreArr[arrIndex] = 0 ;
+			}
+			//console.log('Answered Score Array:');
+			//console.log(answerScoreArr);
+			
+			currLoc = whichQuestion;
+			prevLoc = currLoc;		
+			$('#question'+prevLoc).hide();
+			if($('#paginator'+prevLoc).length){
+				$('#paginator'+prevLoc).hide();
+			}
+
+			//update currLoc to next
+			currLoc = currLoc+1;
+			$('#question'+currLoc).show();
+
+			if($('#paginator'+currLoc).length){			
+					$('#paginator'+currLoc).show();
+			}
+		}
+		
+		
+	}
+	
+	function handleAnswer(whichAnswer,isThereSubQ){
+		//console.log(whichAnswer);
+		
+		var whQ = whichAnswer.substr(1,1);
+		var whA = whichAnswer.substr(whichAnswer.length-1);
+		
+		//console.log(whQ);
+		//console.log(whA);		
+		
+		//reset answer for ethnicity listener if revisited and value change		
+		//console.log(typeof answerValArr[6]==="undefined")
+		if(typeof isAsian === "undefined"){
+			//first time fill
+			if(whQ==='7'){
+				if(whA==='1'){
+					isAsian=1;	
+				} else{
+					isAsian=0;
+				}
+			}
+			//console.log('isAsian: '+isAsian);
+		} else{
+			if(whQ==='7'){
+				if(isAsian===1){
+					if(whA!='1'){
+						isAsian=0;
+						//reset dropdown for height and weight below
+						$('#qheight8 option:eq(0)').prop('selected', true);
+						$('#qheight8').val('');
+						$('#qweight8 option:eq(0)').prop('selected', true);
+						$('#qweight8').val('');
+						$('#nextBtn8').hide();
+					} 
+				} else {
+					if(whA==='1'){
+						isAsian=1;
+						$('#qheight8 option:eq(0)').prop('selected', true);
+						$('#qheight8').val('');
+						$('#qweight8 option:eq(0)').prop('selected', true);
+						$('#qweight8').val('');
+						$('#nextBtn8').hide();
+					}
+				}
+				//console.log('isAsian: '+isAsian);
+			}
+		}
+		
+		currLoc = parseInt(whQ);
+		arrIndex = currLoc-1;
+		//store answers
+		//answerValArr[arrIndex] = $('#'+whichAnswer).text();
+		
+		//store answer v2 API consistency
+		switch(whichAnswer){
+			case 'q1answerText0':
+				answerValArr[arrIndex] = 'Self';
+			break;
+			case 'q1answerText1':
+				answerValArr[arrIndex] = 'Someone else';
+			break;
+			case 'q2answerText0':
+				answerValArr[arrIndex] = 'Less than 40 years';
+			break;
+			case 'q2answerText1':
+				answerValArr[arrIndex] = '40-49 years';
+
+
+			break;
+			case 'q2answerText2':
+				answerValArr[arrIndex] = '50-59 years';
+			break;
+			case 'q2answerText3':
+				answerValArr[arrIndex] = '60 years or older';
+			break;
+			case 'q3answerText0':
+				answerValArr[arrIndex] = 'Woman';
+			break;
+			case 'q3answerText1':
+				answerValArr[arrIndex] = 'Yes';
+			break;
+			case 'q4answerText0':
+				answerValArr[arrIndex] = 'No';
+			break;
+			case 'q4answerText1':
+				answerValArr[arrIndex] = 'Yes';
+			break;
+			case 'q5answerText0':
+				answerValArr[arrIndex] = 'No';
+			break;
+			case 'q5answerText1':
+				answerValArr[arrIndex] = 'Yes';
+			break;
+			case 'q6answerText1':
+				answerValArr[arrIndex] = 'No';
+			break;
+			case 'q6answerText0':
+				answerValArr[arrIndex] = 'Yes';
+			break;
+			case 'q7answerText0':
+				answerValArr[arrIndex] = 'white';
+			break;
+			case 'q7answerText1':
+				answerValArr[arrIndex] = 'asian_american';
+			break;
+			case 'q7answerText2':
+				answerValArr[arrIndex] = 'latino';
+			break;
+			case 'q7answerText3':
+				answerValArr[arrIndex] = 'american_indian';
+			break;
+			case 'q7answerText4':
+				answerValArr[arrIndex] = 'african_american';
+			break;
+			case 'q7answerText5':
+				answerValArr[arrIndex] = 'islander';
+			break;
+			case 'q7answerText6':
+				answerValArr[arrIndex] = 'other';
+			break;
+			case 'q7answerText7':
+				answerValArr[arrIndex] = 'no_response';
+			break;
+			
+			default:
+				//answerValArr[arrIndex] = $('#'+whichAnswer).text();
+		}
+		
+		//console.log(answerValArr[currLoc]);
+		//console.log('Answered Text Array:');
+		//console.log(answerValArr);
+		
+		selectedAnswers[arrIndex] = parseInt(whA);
+		//console.log('Answered Button Location Index Array:');
+		//console.log(selectedAnswers);
+		
+		
+		if(noscore[arrIndex]!='y'){
+		//if((currLoc!=1)&&(currLoc!=9)&&(currLoc!=7)){
+			answerScoreArr[arrIndex] = parseInt(whA);
+		} else {
+			answerScoreArr[arrIndex] = 0 ;
+		}
+		//console.log('Answered Score Array:');
+		//console.log(answerScoreArr);
+		
+		if(isThereSubQ!=1){
+		
+			prevLoc = currLoc;		
+			$('#question'+prevLoc).hide();
+			if($('#paginator'+prevLoc).length){
+				$('#paginator'+prevLoc).hide();
+			}
+
+			//update currLoc to next
+			currLoc = currLoc+1;
+			$('#question'+currLoc).show();
+
+
+			if($('#paginator'+currLoc).length){			
+				$('#paginator'+currLoc).show();
+			}
+
+			showCurrentAnswerSelection(currLoc);
+		} else {
+			if(whA===subQforAVal){
+				$('#question'+currLoc+' .subQuestionText').show();
+				$('#question'+currLoc+' .subquestionboxes').show();
+			} else {
+				$('#question'+currLoc+' .subQuestionText').hide();
+				$('#question'+currLoc+' .subquestionboxes').hide();
+				answerValArr[arrIndex] = $('#'+whichAnswer).text();				
+				answerScoreArr[arrIndex] = parseInt(whA);
+				
+				prevLoc = currLoc;		
+				$('#question'+prevLoc).hide();
+				if($('#paginator'+prevLoc).length){
+					$('#paginator'+prevLoc).hide();
+				}
+
+				//update currLoc to next
+				currLoc = currLoc+1;
+				$('#question'+currLoc).show();
+
+				if($('#paginator'+currLoc).length){			
+					$('#paginator'+currLoc).show();
+				}
+			}
+			
+			showCurrentAnswerSelection(currLoc);
+		}
+		
+		
+	}
+		
+	function handleSubAnswer(whichAnswer){
+		//console.log(whichAnswer);
+		
+		var whSQ = whichAnswer.substr(2,1);
+		var whSA = whichAnswer.substr(whichAnswer.length-1);
+		//console.log(whSQ);
+		
+		currLoc = parseInt(whSQ);
+		arrIndex = currLoc-1;
+		
+		
+		//append answer/score on same array index to be separated by delimiter upon API submit
+		var oriTextAnswer = answerValArr[arrIndex].split("|");
+		//answerValArr[arrIndex] = oriTextAnswer[0]+"|"+$('#'+whichAnswer).text();
+		
+		switch(whichAnswer){
+			case 'sq3answerText0':
+				answerValArr[arrIndex] = oriTextAnswer[0]+"|No";
+			break;
+			case 'sq3answerText1':
+				answerValArr[arrIndex] = oriTextAnswer[0]+"|Yes";
+			break;
+		}
+		
+		
+		//console.log('Answered Text Array:');
+		//console.log(answerValArr);	
+		
+		//console.log('Answered Button Location Index Array:');
+		//console.log(selectedAnswers);	
+		
+		selectedSubAnswers[arrIndex] = parseInt(whSA);	
+		//console.log('Sub Answered Button Location Index Array:');
+		//console.log(selectedSubAnswers);		
+		
+		answerScoreArr[arrIndex] = parseInt(whSA);		
+		//console.log('Answered Score Array:');
+		//console.log(answerScoreArr);
+		
+		prevLoc = currLoc;		
+		$('#question'+prevLoc).hide();
+		if($('#paginator'+prevLoc).length){
+			$('#paginator'+prevLoc).hide();
+		}
+
+		//update currLoc to next
+		currLoc = currLoc+1;
+		$('#question'+currLoc).show();
+
+		if($('#paginator'+currLoc).length){			
+			$('#paginator'+currLoc).show();
+		}
+		
+		showCurrentAnswerSelection(currLoc);
+		
+	}
+	function showNextPage(whichPage){
+		
+		console.log('Answered Text Array:');
+		console.log(answerValArr);
+		
+		console.log('Answered Score Array:');
+		console.log(answerScoreArr);
+		
+		var targetPg = parseInt(whichPage.substr(whichPage.length-1));
+		var currPg = targetPg - 1;
+		
+		$('#question'+currPg).hide();
+		$('#question'+targetPg).show();
+
+		if($('#paginator'+currPg).length){			
+			$('#paginator'+currPg).hide();
+		}
+		if($('#paginator'+targetPg).length){			
+			$('#paginator'+targetPg).show();
+		}	
+		
+		
+			
+		
+	}
+		
+	function showPage(whichPage){
+		//console.log(whichPage);
+		var currPg = whichPage.substr(whichPage.length-1);
+		var targetPg = parseInt(whichPage.substr(whichPage.length-1))-1;
+		
+		$('#question'+currPg).hide();
+		$('#question'+targetPg).show();
+		
+		if($('#paginator'+currPg).length){			
+			$('#paginator'+currPg).hide();
+		}
+
+		if($('#paginator'+targetPg).length){			
+			$('#paginator'+targetPg).show();
+		}
+		
+		if(($('#qheight8').val()!='')&&($('#qweight8').val()!='')){
+			$('#nextBtn8').show();
+		} else {
+			$('#nextBtn8').hide();
+		}
+		showCurrentAnswerSelection(targetPg);
+		
+	}
+		
+	function showCurrentAnswerSelection(whichPage){
+		
+		$('.mainanswers').removeClass('selectedAnswer');
+		$('.subanswers').removeClass('selectedAnswer');
+		$('#q'+whichPage+'answerText'+selectedAnswers[whichPage-1]).addClass('selectedAnswer');
+		$('#sq'+whichPage+'answerText'+selectedSubAnswers[whichPage-1]).addClass('selectedAnswer');	
+			
+	//$('html, body').animate({scrollTop: $('#root').offset().top - 100}, 800);
+$("html,body", window.parent.document).scrollTop(0);	
+		
+	}	
+		
+	function isEven(n){
+		return n % 2 == 0;
+	}
+	
+	function getURLParameter(name) {
+	   return decodeURI(
+		  (RegExp(name + '=' + '(.+?)(&|$)').exec(location.search) || [, null])[1]
+	   );
+	}
+	
+	function ValidateEmail(inputText,whichLoc) {
+		
+		if(typeof whichLoc==="undefined"){
+			whichLoc='';	
+		}
+		
+		var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+		if(inputText.match(mailformat)){
+			
+			//GDPR
+			
+			if($('#cons_country'+whichLoc).val()===''){
+				$('#emailcheckmsg'+whichLoc).text('Please select your country of residence.');
+				$('#emailcheckmsg'+whichLoc).show();				
+				setTimeout(function(){ $('#emailcheckmsg'+whichLoc).hide(); }, 3000);				
+				return false;
+			} else {
+				/*if(typeof whichLoc === "undefined"){
+					checkMYGDPR();
+				} else {
+					checkMYGDPR('2');
+				}*/
+
+				console.log('whichLoc value: '+whichLoc);
+				console.log('isGDPR value: '+isGDPR);
+				console.log('gdpr checkbox checked: '+$('#myGDPR'+whichLoc).is(':checked'));
+
+				if((isGDPR===1)&&($('#myGDPR'+whichLoc).is(':checked'))){
+					return true;
+
+				} else if(isGDPR===0){
+					return true;
+				} else{
+					$('#emailcheckmsg'+whichLoc).text('GDPR consent is required for resident of countries affected by GDPR that include yours.');
+					$('#emailcheckmsg'+whichLoc).show();					
+					setTimeout(function(){ $('#emailcheckmsg'+whichLoc).hide(); }, 3000);			
+					return false;
+				}
+			}
+			
+			
+		}
+		else {
+			//alert("You have entered an invalid email address!");
+			$('#emailcheckmsg'+whichLoc).text('Invalid email address!');
+			$('#emailcheckmsg'+whichLoc).show();			
+			setTimeout(function(){ $('#emailcheckmsg'+whichLoc).hide(); }, 3000);			
+			return false;
+		}
+	}
+	
+	function inIframe(){		
+		try {		
+		return window.self !== window.top;		
+		} catch (e) {		
+		return true;		
+
+		}	
+	}
+
+//ADHOC content render control
+
+function openContent(whatContent){
+switch(whatContent){
+		case 'RiskScore':
+			$('#RTscorearea').show();
+			if(hasEmailed===0){
+				$('#emailResult').show();
+			}
+			$('#relatedinfo').show();
+			$('#adahotline').show();
+			$('#aboutrisktest').hide();
+			$('#revscore').hide();
+			scrollToTarget('RTscorearea');
+		break;
+		case 'AboutRisk':
+			$('#RTscorearea').hide();		
+			$('#emailResult').hide();
+			$('#relatedinfo').hide();
+			$('#adahotline').hide();
+			$('#revscore').hide();
+			$('#aboutrisktest').show();		
+			scrollToTarget('aboutrisktest');
+		break;
+		case 'revscore':
+		$('#RTscorearea').hide();
+		$('#emailResult').hide();
+		$('#relatedinfo').hide();
+		$('#adahotline').hide();
+		$('#revscore').show();
+		scrollToTarget('revscore');
+		break;
+        case 'diabetesbasic':
+
+           $('.subsectioncontent').hide();
+           $('.infonavbox').removeClass('active');
+           $('#'+whatContent).show(); 
+           $('#dbnav').addClass('active');
+           scrollToTarget(whatContent);          
+        break;
+        case 'sthl':
+            $('.subsectioncontent').hide();
+            $('.infonavbox').removeClass('active');
+           $('#'+whatContent).show(); 
+           $('#sthlnav').addClass('active');
+           scrollToTarget(whatContent);          
+        break;
+       case 'helpothers':
+            $('.subsectioncontent').hide();
+            $('.infonavbox').removeClass('active');
+            $('#'+whatContent).show();
+            $('#sylonav').addClass('active'); 
+           scrollToTarget(whatContent);          
+        break;
+        case 'getinvolved':
+            $('.subsectioncontent').hide();
+            $('.infonavbox').removeClass('active');
+            $('#'+whatContent).show(); 
+            $('#ginav').addClass('active');
+           scrollToTarget(whatContent);          
+        break;
+		case 'diabetesbasic2':
+           $('.subsectioncontent').hide();
+           $('.infonavbox').removeClass('active');
+           $('#'+whatContent).show(); 
+           $('#dbhnav').addClass('active');
+           scrollToTarget(whatContent);          
+        break;
+        case 'recentlydiagnosed':
+		   $('.subsectioncontent').hide();
+           $('.infonavbox').removeClass('active');
+           $('#'+whatContent).show(); 
+           $('#rdnav').addClass('active');
+           scrollToTarget(whatContent); 
+		break;
+        case 'dpprogram':
+           $('.subsectioncontent').hide();
+           $('.infonavbox').removeClass('active');
+           $('#'+whatContent).show(); 
+           $('#dppnav').addClass('active');
+           scrollToTarget(whatContent);          
+        break;
+       case 'healthyeating':
+            $('.subsectioncontent').hide();
+            $('.infonavbox').removeClass('active');
+            $('#'+whatContent).show();
+            $('#henav').addClass('active'); 
+           scrollToTarget(whatContent);          
+        break;
+        case 'physicalexercise':
+            $('.subsectioncontent').hide();
+            $('.infonavbox').removeClass('active');
+            $('#'+whatContent).show(); 
+            $('#penav').addClass('active');
+           scrollToTarget(whatContent);          
+        break;
+		case 'q2review':
+		case 'q3review':
+		case 'q4review':
+		case 'q5review':
+		case 'q6review':
+		case 'q8review':
+			$('.reviewanswers').hide();
+			$('#'+whatContent).show();
+		break;
+}
+}
+
+//window.onscroll = function() {displayScrollToBtns()};
+/*function displayScrollToBtns() {
+    if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+       $('.topbuttons').show();
+    } else {
+        $('.topbuttons').hide();
+    }
+}*/
+function scrollToTarget(whatTop){
+    var elmnt = document.getElementById(whatTop);
+    elmnt.scrollIntoView();	
+	//$('html,body').scrollTop($('#'+whatTop).offset().top - 90);
+	//elmnt.parentNode.scrollTop = elmnt.offsetTop;
+	//console.log(elmnt.offsetTop);
+	$('html,body', window.parent.document).scrollTop(elmnt.offsetTop);
+}
+	
+function magPop(whichDiv){
+	$.magnificPopup.open({
+		  items: {
+			  src: '#'+whichDiv,
+			  type: 'inline',
+			  /*fixedContentPos:true*/
+
+			  alignTop:true,
+			  focus:'#revscorecontent'
+		  },
+		  callbacks:{
+                open:function () {
+					if(screen.width <1024){
+						scrollToTarget(whichDiv);
+					} else {
+						window.parent.scrollTo( screen.width/2, (screen.height/2)+400 );
+					}
+					
+                },
+                close:function () {
+                    scrollToTarget('RTscorearea');
+                }
+            }
+  		});
+	
+}
+
+
+function showOption(whichOption){
+	$('.doctorrelated').hide();
+	$('#introseedoctor').hide();
+	$('.'+whichOption+'related').show();
+	switch(whichOption){
+		case 'type2':
+			var t2='yes';
+			//var pd='no';
+			$('#dppsearchbox').hide();
+
+			$('#dppResult').hide();
+			$('#erpResult').show();
+			$('#erpsearchbox').show();
+			$('#rdnav').show();
+			$('#dppnav').hide();
+			if($('#dppnav').hasClass('active')){
+				$('#dppnav').removeClass('active');
+				$('#rdnav').addClass('active');
+				$('#recentlydiagnosed').show();
+				$('#dpprogram').hide();
+			} 
+		break;
+		case 'prediabetes':
+			//var t2='no';
+			var pd='yes';
+			$('#dppsearchbox').show();
+			$('#dppResult').show();
+			$('#erpResult').hide();
+			$('#erpsearchbox').hide();
+			$('#rdnav').hide();
+			$('#dppnav').show();
+			if($('#rdnav').hasClass('active')){
+				$('#rdnav').removeClass('active');
+				$('#dppnav').addClass('active');
+				$('#recentlydiagnosed').hide();
+				$('#dpprogram').show();
+			} 	
+		break;
+	}
+	if(typeof recordID !="undefined"){
+		console.log('running PUT to record interaction of radio button');
+		if(t2==='yes'){
+			$.ajax({
+						type       : 'PUT',
+						url        : adaapiurl+'/'+recordID,					
+						crossDomain: true,
+						beforeSend : function(xhr) {},
+						complete   : function() {},
+						data       : {
+							  //"id": recordID,
+							  "diagnosedtype2": t2
+							  //"diagnosedprediabetes":pd
+							  
+						},
+						dataType   : 'json',    
+						success    : function(data, textStatus, jqXHR) {       
+							console.log('docupdate success');						
+						},
+						error      : function(jqXHR, textStatus, errorThrown ) {
+							console.log('docupdate error');	  
+
+						} // end error
+				  });//end ajax	
+		} else {
+			$.ajax({
+						type       : 'PUT',
+						url        : adaapiurl+'/'+recordID,					
+						crossDomain: true,
+						beforeSend : function(xhr) {},
+						complete   : function() {},
+						data       : {
+							  //"id": recordID,
+							  //"diagnosedtype2": t2,
+							  "diagnosedprediabetes":pd
+							  
+						},
+						dataType   : 'json',    
+						success    : function(data, textStatus, jqXHR) {       
+							console.log('docupdate success');						
+						},
+						error      : function(jqXHR, textStatus, errorThrown ) {
+							console.log('docupdate error');	  
+
+						} // end error
+				  });//end ajax	
+			}
+		}
+}
+function resetSelection(){
+	$('.doctorrelated').hide();
+	$('#introseedoctor').show();
+	$('#type2radiobox').show();
+	$('#prediabetesradiobox').show();
+	$('#dppsearchbox').show();
+	$('#dppResult').show();
+	$('#erpResult').hide();
+	$('#erpsearchbox').hide();
+	$('input[name="seedoctor"]').prop('checked', false);
+	$('#rdnav').hide();
+	$('#dppnav').show();
+	if($('#rdnav').hasClass('active')){
+				$('#rdnav').removeClass('active');
+				$('#dppnav').addClass('active');
+				$('#recentlydiagnosed').hide();
+				$('#dpprogram').show();
+	} 
+}
+
+
+function getDPPList(){
+	dppList = $.getJSON('../ws/risktest/DPP.json?nocache='+(new Date()).getTime(), function(data){
+		//console.log('dppList count: '+data.length);
+		var dpp = _.groupBy(data,function(e){
+			return e.State;
+			//return e.State+'#'+e.City;
+		});
+		//console.log(dpp);
+		
+		var dppLoc = $('#dppResult');
+		var dppList = "";
+		/*$.each(data, function(key, value){
+		    console.log(key, value);
+		});*/
+		$.each(dpp, function(key, value){
+		   // console.log(key, value);
+		    //dppList += '<div class="dpp'+key+' text-center"><p class="bolder">'+key+'</p>';
+dppList += '<div class="dpp'+key+' text-center dppstates inithide">';
+			dppList +='<div class="text-left" style="margin-top:20px;"><p style="font-size:16pt;">Here are the list of Diabetes Prevention Program in '+key+'</p><p>There are currently '+value.length+' program(s). This list also includes available program(s) that are offered through online.</p></div>';
+		    $.each(value, function(a,e){
+		    	if(e.ClassopenTo==='Public'){
+		    	dppList+='<div class="dppBoxes text-left">';
+		    	if(e.WebAddress!=''){
+		    		dppList+='<p><a class="bolder" href="'+e.WebAddress+'" target="_blank">'+e.Name+'</a></p>';
+		    	} else {
+		    		dppList+='<p><strong>'+e.Name+'</strong></p>';
+		    	}
+		    	
+		    	dppList+='<p class="dppdetails"><i class="fa fa-map-marker" aria-hidden="true"></i> '+e.AddressLine1+'<br />';
+				if(e.AddressLine2 != ''){
+		    		dppList+= e.AddressLine2+'<br />';
+				}
+		    	dppList+= e.City+', '+e.State+' '+e.Zip+'</p>';
+		    	dppList+='<p class="dppdetails"><i class="fa fa-phone" aria-hidden="true"></i> '+e.Phone+'</p>';
+				
+				if(e.WebAddress!=''){
+					dppList+='<p class="dppdetails"><i class="fa fa-external-link" aria-hidden="true"></i> <a class="bolder" style="display: inline-block;font-size: 14px;font-weight: normal;" href="'+e.WebAddress+'" target="_blank">visit website <i class="fa fa-chevron-right" aria-hidden="true"></i></a></p>';
+				}
+		    	dppList+='</div>';
+		    	}
+		    })
+		    dppList += '</div>';
+		});
+		dppLoc.append(dppList);
+	});
+}
+	
+function showDPPbyState(){
+	var whatState = $('#dppStates').val();
+	$('.dppstates').hide();
+	$('.dpp'+whatState).show();
+}	
+
+function findERP(){
+	if(($('#myERPZip').val()!='')&&($('#erpMiles').val()!='')){
+	/*$.ajax({
+					type       : 'GET',
+					url        : erpapiurl,					
+					crossDomain: true,
+					beforeSend : function(xhr) {},
+					complete   : function() {},
+					data       : {
+						  
+						  "geodistance[distance]": $('#erpMiles').val(),
+						  "geodistance[origin]": $('#myERPZip').val()
+					},
+					dataType   : 'json',    
+					success    : function(data, textStatus, jqXHR) {       
+						console.log('success');	
+					console.log(data);					
+					},
+					error      : function(jqXHR, textStatus, errorThrown ) {
+				 		console.log('error');	  
+					 
+					} // end error
+			  });//end ajax	*/
+
+		erpList = $.getJSON(erpapiurl+'?geodistance[distance]='+$('#erpMiles').val()+'&geodistance[origin]='+$('#myERPZip').val(), function(data){
+		var erpLoc = $('#erpResult');
+		var erpList = "";
+		//console.log(data);
+	
+	    //var erpSorted = _.sortBy(data, function(o) { return o.Distance; });
+		
+		var erpLoc = $('#erpResult');
+		var erpList = "";
+		
+		erpList += '<div class="erpbyzip">';
+		erpList +='<div class="text-left" style="margin-top:20px;"><p style="font-size:16pt;">Here are the list of Recognized Education Program found within <strong>'+$('#erpMiles').val()+' miles</strong> from <strong>'+$('#myERPZip').val()+'</strong>. There are currently '+data.length+' program(s).</p></div>';
+	
+		var noERPFeat;
+	
+		$.each(data, function(key, value){
+			erpList+='<div class="erpBoxes text-left equalheight">';
+			erpList+='<p class="bolder">'+value["Sponsoring Organization"]+'</p>';
+			erpList+='<p>Program Name: '+value["Site/Program Name"]+'</p>';
+			erpList+='<p>Program ID: '+value["Program ID"]+'</p>';
+			erpList+='<p class="erpDetails"><i class="fa fa-map-marker" aria-hidden="true"></i> '+value.Address+'<br />'+value.City+', '+value.State+' '+value.ZIP+'</p>';
+			erpList+='<p class="erpDetails"><strong>'+value.Distance+'</strong></p>';
+			erpList+='<p class="erpDetails"><i class="fa fa-phone" aria-hidden="true"></i> '+value.Phone+'</p>';
+			erpList+='<p class="erpDetails"><strong><u>Additional Program(s):</u></strong></p><div>';
+			noERPFeat='no';
+			if(value.Spanish==='Yes'){
+				erpList+='<span>Spanish</span>&nbsp;';
+				noERPFeat='yes';
+			}
+			if(value.Pediatric==='Yes'){
+				erpList+='<span>Pediatric</span>&nbsp;';
+				noERPFeat='yes';
+			}
+			if(value["Long-Distance Learning"]==='Yes'){
+				erpList+='<span>Distance Learning</span>';
+				noERPFeat='yes';
+			}
+			if(noERPFeat==='no'){
+				erpList+='<span>No Spanish, Pediatric, or Distance Learning</span>';
+			}
+			erpList+='</div>';//div feature
+			erpList+='</div>';
+		});
+		erpList+='</div>';						
+		erpLoc.html(erpList);
+		
+	})
+	.done(function() {
+				  console.log('erp ajax done');
+				  $('#erpResult .eroBoxes').matchHeight({ remove: true });
+    			  // apply matchHeight on the new selection, which includes the new element
+		 		  $('#erpResult .erpBoxes').matchHeight();   			 
+			  });
+		
+	} else {
+		$('#erpvalidatemsg').show();
+		setTimeout(function(){ $('#erpvalidatemsg').hide(); }, 3000);
+	}
+}
+	
+	
+
+function findDPP(){
+		if(($('#myDPPZip').val()!='')&&($('#dppMiles').val()!='')){
+		
+		totaldppfeat=0;
+		totaldpponline=0;
+		totaldppip=0;
+		
+		var dpp2Loc = $('#dppResult');
+		var dpp2List = "";
+		dpp2List += '<div class="dppbyzip">';
+		dpp2List +='<div class="text-left" style="margin-top:20px;"><p style="font-size:16pt;">Here are the list of Diabetes Prevention Program found within <strong>'+$('#dppMiles').val()+' miles</strong> from <strong>'+$('#myDPPZip').val()+'</strong>.</p></div>';
+		
+		//group 1 featured
+		$.ajax({
+					type       : 'GET',
+					url        : dppapiurl,					
+					crossDomain: true,
+					beforeSend : function(xhr) {},
+					complete   : function() {},
+					data       : {						  
+						  "transform": true,
+						  "order[0]":"name", 
+						  //"access_token":atokval,
+						  "filter[0]":"groupfeatured,EQ,1"						  
+					},
+					dataType   : 'json',    
+					success    : function(data, textStatus, jqXHR) {       
+						//console.log('dpp success');	
+						//console.log(data);	
+						//console.log(data.dpp);						
+						
+						dpp2List+='<div id="dppfeattop" style="/*background: #edab37; background: linear-gradient(to right, #edab37, #c92e36 );*/background:url(\'../ws/risktest/img/bar_gradient_red.png\');padding:10px;"><div class="row"><div class="col-md-12 text-right"><div class="bolder" style="color:#FFF;font-weight:700;font-size:20pt;/*text-shadow:2px 2px 5px #000;*/display:inline-block;zoom:1;*display:inline;">Featured Programs</div><!--<br />--><div style="display:inline-block;zoom:1;*display:inline;font-size:14pt;color:#FFF;">&nbsp;&nbsp;<span id="totaldppfeat" style="font-size:14pt;color:#FFF;"></span> program(s) &nbsp;</div><div style="clear:both;height:1px;">&nbsp;</div></div></div></div>';			
+
+						
+						$.each(data.dpp, function(key, value){						
+							
+								dpp2List+='<div class="dppBoxes dppfeat text-left equalheight">';
+								if(value.featured==='x'){
+									dpp2List+='<div class="featstripes" style="padding:5px;background-color:#F90;margin: 25px 0 10px 0;text-align:center;"><p style="color:#FFF;/*text-shadow:2px 2px 5px #000;*/font-weight:900;"><i class="fa fa-star" aria-hidden="true"></i> FEATURED <i class="fa fa-star" aria-hidden="true"></i></p></div>';
+								}
+							    dpp2List+='<div style="padding:15px;">';
+								if(value.webaddress!=''){
+									dpp2List+='<p><a class="bolder" href="'+value.webaddress+'" target="_blank">'+value.name+'</a></p>';
+								} else {
+									dpp2List+='<p><strong>'+value.name+'</strong></p>';
+								}
+
+								dpp2List+='<p class="dppdetails"><i class="fa fa-map-marker" aria-hidden="true"></i> '+value.addressline1+'<br />';
+								if(value.addressline2 != ''){
+									dpp2List+= value.addressline2+'<br />';
+								}
+								dpp2List+= value.city+', '+value.state+' '+value.zip+'</p>';
+							
+								var zipdistance = Number(value.distancefromzip);
+							    zipdistance = round(zipdistance, 2); //2 decimal
+								if(value.deliverymode==="In-Person"){
+							    	dpp2List+='<p class="dppdetails">'+zipdistance+' miles</p>';
+								}
+								dpp2List+='<p class="dppdetails"><i class="fa fa-phone" aria-hidden="true"></i> '+value.phone+'</p>';
+
+								if(value.deliverymode==="OnLine"){
+								dpp2List+='<p class="dppdetails"><i class="fa fa-laptop" aria-hidden="true"></i> '+value.deliverymode+' program</p>';
+								} else {
+																dpp2List+='<p class="dppdetails">'+value.deliverymode+' program</p>';
+								}
+								if(value.webaddress!=''){
+									dpp2List+='<p class="dppdetails"><i class="fa fa-external-link" aria-hidden="true"></i> <a class="bolder" style="display: inline-block;font-size: 14px;font-weight: normal;" href="'+value.webaddress+'" target="_blank">visit website <i class="fa fa-chevron-right" aria-hidden="true"></i></a></p>';
+								}					
+								dpp2List+='</div></div>';
+								totaldppfeat++;
+							
+						});
+						
+						dpp2List+='<div style="clear:both;height:10px;">&nbsp;</div>';
+						
+					},
+					error      : function(jqXHR, textStatus, errorThrown ) {
+				 		console.log('dpp error');	  
+					 
+					} // end error
+			  }).done(function() {
+					  //group 2 in person
+					$.ajax({
+						type       : 'GET',
+						url        : dppapiurl,					
+						crossDomain: true,
+						beforeSend : function(xhr) {},
+						complete   : function() {},
+						data       : {						  
+							  "transform": true,
+							  //"access_token":atokval,
+							  "order[0]":"distancezip:"+$('#myDPPZip').val(),							  
+							  "filter[0]":"groupinperson,EQ,1",						 "filter[1]":"distancezip:"+$('#myDPPZip').val()+",le,"+$('#dppMiles').val()
+						},
+						dataType   : 'json',    
+						success    : function(data, textStatus, jqXHR) {       
+							//console.log('dpp success');	
+							//console.log(data);
+							//console.log(data.dpp);
+							
+							dpp2List+='<div id="dppiptop" style="/*background: #bad8e0; background: linear-gradient(to right, #bad8e0, #007393 );*/background:url(\'../ws/risktest/img/bar_gradient_blue.png\');padding:10px;"><div class="row"><div class="col-md-12 text-right"><div class="bolder" style="color:#FFF;font-weight:700;font-size:20pt;/*text-shadow:2px 2px 5px #000;*/display:inline-block;zoom:1;*display:inline;">In-Person Programs</div><!--<br />--><div style="display:inline-block;zoom:1;*display:inline;font-size:14pt;color:#FFF;">&nbsp;&nbsp;<span id="totaldppip" style="font-size:14pt;color:#FFF;"></span> program(s) &nbsp;</div><div style="clear:both;height:1px;">&nbsp;</div></div></div></div>';
+							
+							
+							$.each(data.dpp, function(key, value){						
+
+									
+										dpp2List+='<div class="dppBoxes dppip text-left equalheight">';
+								
+										var zipdistance = Number(value.distancefromzip);
+										zipdistance = round(zipdistance, 2); //2 decimal
+								
+										if(value.featured==='x'){
+												dpp2List+='<div class="featstripes" style="padding:5px;background-color:#F90;margin: 25px 0 10px 0;text-align:center;"><p style="color:#FFF;/*text-shadow:2px 2px 5px #000;*/font-weight:900;"><i class="fa fa-star" aria-hidden="true"></i> FEATURED <i class="fa fa-star" aria-hidden="true"></i></p></div>';
+										} else {
+										dpp2List+='<div class="ipstripes" style="padding:5px;background-color:#bad8e0;margin: 25px 0 10px 0;" class="text-right"><p style="color:#FFF;/*text-shadow:2px 2px 5px #000;*/font-weight:700;"><i class="fa fa-map-marker" aria-hidden="true"></i> &nbsp; '+zipdistance+' miles &nbsp;&nbsp;&nbsp;</p></div>';
+										}
+																			
+										dpp2List+='<div style="padding:15px;">';
+										if(value.webaddress!=''){
+
+											dpp2List+='<p><a class="bolder" href="'+value.webaddress+'" target="_blank">'+value.name+'</a></p>';
+										} else {
+											dpp2List+='<p><strong>'+value.name+'</strong></p>';
+										}
+
+										dpp2List+='<p class="dppdetails"><i class="fa fa-map-marker" aria-hidden="true"></i> '+value.addressline1+'<br />';
+										if(value.addressline2 != ''){
+											dpp2List+= value.addressline2+'<br />';
+										}
+										dpp2List+= value.city+', '+value.state+' '+value.zip+'</p>';
+
+										
+										/*if(value.deliverymode==="In-Person"){
+											dpp2List+='<p class="dppdetails">'+zipdistance+' miles</p>';
+										}*/
+										dpp2List+='<p class="dppdetails"><i class="fa fa-phone" aria-hidden="true"></i> '+value.phone+'</p>';
+
+										if(value.deliverymode==="OnLine"){
+										dpp2List+='<p class="dppdetails"><i class="fa fa-laptop" aria-hidden="true"></i> '+value.deliverymode+' program</p>';
+										} else {
+											dpp2List+='<p class="dppdetails">'+value.deliverymode+' program</p>';
+										}
+									if(value.webaddress!=''){
+										dpp2List+='<p class="dppdetails"><i class="fa fa-external-link" aria-hidden="true"></i> <a class="bolder" style="display: inline-block;font-size: 14px;font-weight: normal;" href="'+value.webaddress+'" target="_blank">visit website <i class="fa fa-chevron-right" aria-hidden="true"></i></a></p>';
+									}					
+									dpp2List+='</div>';									
+									dpp2List+='</div>';
+									totaldppip++;
+								
+							});
+							
+							dpp2List+='<div class="row dppiptogglebtn inithide"><div class="col-md-12" style="display:none;"><a class="redbtn showmorelistbtn" onClick="showMoreList(\'dppResult\',\'dppip\',0);">Show More</a></div><div class="col-md-12" style="display:none;"><a class="redbtn showlesslistbtn" onClick="showLessList(\'dppResult\',\'dppip\',0);">Show Less</a></div><div class="col-md-12"><a class="redbtn showmorelistbtn" onClick="showAllRemainderList(\'dppResult\',\'dppip\',0);">Show All</a></div><div class="col-md-12"><a class="redbtn showlesslistbtn" onClick="hideAllRemainderList(\'dppResult\',\'dppip\',0);">Show First Row</a></div></div><div style="clear:both;height:1px;">&nbsp;</div>';			
+							
+							
+							dpp2List+='<div style="clear:both;height:10px;">&nbsp;</div>'
+						
+						},
+						error      : function(jqXHR, textStatus, errorThrown ) {
+							console.log('dpp error');	  
+
+						} // end error
+				  }).done(function() {
+							//group 3 online
+							$.ajax({
+							type       : 'GET',
+							url        : dppapiurl,					
+							crossDomain: true,
+							beforeSend : function(xhr) {},
+							complete   : function() {},
+							data       : {						  
+								  "transform": true,
+								  //"access_token":atokval,
+								  "order[0]":"name", 
+								  "filter[0]":"grouponline,EQ,1"						 
+							},
+							dataType   : 'json',    
+							success    : function(data, textStatus, jqXHR) {       
+								//console.log('dpp success');	
+								//console.log(data);
+								//console.log(data.dpp);
+								
+								dpp2List+='<div id="dpponlinetop" style="/*background: #dde082; background: linear-gradient(to right, #dde082, #babe2e );*/background:url(\'../ws/risktest/img/bar_gradient_green.png\');padding:10px;"><div class="row"><div class="col-md-12 text-right"><div class="bolder" style="color:#FFF;font-weight:700;font-size:20pt;/*text-shadow:2px 2px 5px #000;*/display:inline-block;zoom:1;*display:inline;">Online Programs</div><!--<br />--><div style="display:inline-block;zoom:1;*display:inline;font-size:14pt;color:#FFF;">&nbsp;&nbsp;<span id="totaldpponline" style="font-size:14pt;color:#FFF;"></span> program(s) &nbsp;</div><div style="clear:both;height:1px;">&nbsp;</div></div></div></div>';
+								
+								$.each(data.dpp, function(key, value){
+									
+											dpp2List+='<div class="dppBoxes dpponline text-left equalheight">';
+									
+											if(value.featured==='x'){
+												dpp2List+='<div class="featstripes" style="padding:5px;background-color:#F90;margin: 25px 0 10px 0;text-align:center;"><p style="color:#FFF;/*text-shadow:2px 2px 5px #000;*/font-weight:900;"><i class="fa fa-star" aria-hidden="true"></i> FEATURED <i class="fa fa-star" aria-hidden="true"></i></p></div>';
+											} else {
+											
+											dpp2List+='<div class="onlinestripes" style="padding:5px;background-color:#dde082;margin: 25px 0 10px 0;" class="text-right"><p style="color:#FFF;/*text-shadow:2px 2px 5px #000;*/font-weight:700;"><i class="fa fa-laptop" aria-hidden="true"></i> &nbsp; Online &nbsp;&nbsp;&nbsp;</p></div>';
+												
+											}
+
+											dpp2List+='<div style="padding:15px;">';
+											if(value.webaddress!=''){
+												dpp2List+='<p><a class="bolder" href="'+value.webaddress+'" target="_blank">'+value.name+'</a></p>';
+											} else {
+												dpp2List+='<p><strong>'+value.name+'</strong></p>';
+											}
+
+											/*dpp2List+='<p class="dppdetails"><i class="fa fa-map-marker" aria-hidden="true"></i> '+value.addressline1+'<br />';
+											if(value.addressline2 != ''){
+												dpp2List+= value.addressline2+'<br />';
+											}
+											dpp2List+= value.city+', '+value.state+' '+value.zip+'</p>';*/
+
+
+											/*if(value.deliverymode==="In-Person"){
+												dpp2List+='<p class="dppdetails">'+zipdistance+' miles</p>';
+											}*/
+											
+											dpp2List+='<p class="dppdetails"><i class="fa fa-phone" aria-hidden="true"></i> '+value.phone+'</p>';
+
+											if(value.deliverymode==="OnLine"){
+											dpp2List+='<p class="dppdetails"><i class="fa fa-laptop" aria-hidden="true"></i> '+value.deliverymode+' program</p>';
+											} else {
+												dpp2List+='<p class="dppdetails">'+value.deliverymode+' program</p>';
+											}
+										if(value.webaddress!=''){
+											dpp2List+='<p class="dppdetails"><i class="fa fa-external-link" aria-hidden="true"></i> <a class="bolder" style="display: inline-block;font-size: 14px;font-weight: normal;" href="'+value.webaddress+'" target="_blank">visit website <i class="fa fa-chevron-right" aria-hidden="true"></i></a></p>';
+										}					
+										dpp2List+='</div>';									
+										dpp2List+='</div>';
+										totaldpponline++;
+									
+								});
+								dpp2List+='<div class="row dpponlinetogglebtn inithide"><div class="col-md-12" style="display:none;"><a class="redbtn showmorelistbtn" onClick="showMoreList(\'dppResult\',\'dpponline\',1);" >Show More</a></div><div class="col-md-12" style="display:none;"><a class="redbtn showlesslistbtn" onClick="showLessList(\'dppResult\',\'dpponline\',1);">Show Less</a></div><div class="col-md-12"><a class="redbtn showmorelistbtn" onClick="showAllRemainderList(\'dppResult\',\'dpponline\',1);">Show All</a></div><div class="col-md-12"><a class="redbtn showlesslistbtn" onClick="hideAllRemainderList(\'dppResult\',\'dpponline\',1);">Show First Row</a></div></div><div style="clear:both;height:1px;">&nbsp;</div>';
+								
+								
+								dpp2List+='</div>';						
+								dpp2Loc.html(dpp2List);
+								//console.log(totaldppfeat);
+								//console.log(totaldppip);
+								//console.log(totaldpponline);
+								
+								setToggledList('dppResult','dppip',0);
+								setToggledList('dppResult','dpponline',1);
+								
+								
+								$('#totaldppfeat').text(totaldppfeat.toString());
+								$('#totaldppip').text(totaldppip.toString());
+								$('#totaldpponline').text(totaldpponline.toString());
+							},
+							error      : function(jqXHR, textStatus, errorThrown ) {
+								console.log('dpp error');
+							} // end error						
+
+					  }).done(function(){
+						  $('#dppResult .dppBoxes').matchHeight({ remove: true });
+						  // apply matchHeight on the new selection, which includes the new element
+						  $('#dppResult .dppBoxes').matchHeight();
+
+					  });//end ajax group 3 done						
+				  });//end ajax group 2 done
+			  });//end ajax	group 1 done
+			
+		
+		
+	} else {
+		//alert('please select miles and enter valid zip');
+		$('#dppvalidatemsg').show();
+		setTimeout(function(){ $('#dppvalidatemsg').hide(); }, 3000);
+	}
+}
+	
+	function round(value, decimals) {
+	  return Number(Math.round(value+'e'+decimals)+'e-'+decimals);
+	}
+	
+	function setToggledList(whichParent,whichClass,whichIndex){
+		$('#'+whichParent+' .'+whichClass).hide();
+		itemsize[whichIndex] = $('#'+whichParent+' .'+whichClass).length;		
+		itemperline[whichIndex] =4;//show first 4
+		if(itemsize[whichIndex] > itemperline[whichIndex]){			
+			$('#'+whichParent+' .dppbyzip .'+whichClass+'togglebtn').show();
+			$('#'+whichParent+' .dppbyzip .'+whichClass+'togglebtn .showmorelistbtn').show();
+			$('#'+whichParent+' .dppbyzip .'+whichClass+'togglebtn .showlesslistbtn').hide();
+		}
+		$('#'+whichParent+' .'+whichClass+':lt('+itemperline[whichIndex]+')').show();
+	}
+	
+	function showAllRemainderList(whichParent,whichClass){
+		$('#'+whichParent+' .'+whichClass).show();
+		$('#dppResult .dppBoxes').matchHeight({ remove: true });
+		// apply matchHeight on the new selection, which includes the new element
+		$('#dppResult .dppBoxes').matchHeight();
+		
+		$('#'+whichParent+' .dppbyzip .'+whichClass+'togglebtn .showmorelistbtn').hide();
+		$('#'+whichParent+' .dppbyzip .'+whichClass+'togglebtn .showlesslistbtn').show();
+
+	}
+	
+	function hideAllRemainderList(whichParent,whichClass,whichIndex){
+		//$('#'+whichParent+' .'+whichClass).hide();
+		//reset back to show first 4
+		setToggledList(whichParent, whichClass,whichIndex);
+		$('#dppResult .dppBoxes').matchHeight({ remove: true });
+		// apply matchHeight on the new selection, which includes the new element
+		$('#dppResult .dppBoxes').matchHeight();
+		
+		$('#'+whichParent+' .dppbyzip .'+whichClass+'togglebtn .showmorelistbtn').show();
+		$('#'+whichParent+' .dppbyzip .'+whichClass+'togglebtn .showlesslistbtn').hide();
+		
+		scrollToTarget(whichClass+'top');
+
+	}
+	
+	function showMoreList(whichParent,whichClass,whichIndex){
+		itemperline[whichIndex]= (itemperline[whichIndex]+4 <= itemsize[whichIndex]) ? itemperline[whichIndex]+4 : itemsize[whichIndex];
+		
+        $('#'+whichParent+' .'+whichClass+':lt('+itemperline[whichIndex]+')').show();
+		
+		if(itemperline[whichIndex]>=itemsize[whichIndex]){
+			$('#'+whichParent+' .dppbyzip .'+whichClass+'togglebtn .showmorelistbtn').hide();
+			$('#'+whichParent+' .dppbyzip .'+whichClass+'togglebtn .showlesslistbtn').show();
+		} else if((itemperline[whichIndex]<itemsize[whichIndex])&&(itemperline[whichIndex]-4>0)){
+			$('#'+whichParent+' .dppbyzip .'+whichClass+'togglebtn .showmorelistbtn').show();
+			$('#'+whichParent+' .dppbyzip .'+whichClass+'togglebtn .showlesslistbtn').show();
+		} else {
+			$('#'+whichParent+' .dppbyzip .'+whichClass+'togglebtn .showmorelistbtn').show();
+			$('#'+whichParent+' .dppbyzip .'+whichClass+'togglebtn .showlesslistbtn').hide();
+		}
+				
+		$('#dppResult .dppBoxes').matchHeight({ remove: true });
+		// apply matchHeight on the new selection, which includes the new element
+		$('#dppResult .dppBoxes').matchHeight();
+
+	}
+	
+	function showLessList(whichParent,whichClass,whichIndex){
+		//check the how many items on the last row element
+		var lastrowlength = itemperline[whichIndex] % 4;
+		
+		if (lastrowlength===0){
+			itemperline[whichIndex]=(itemperline[whichIndex]-4<0) ? 4 : itemperline[whichIndex]-4;
+		} else {
+			itemperline[whichIndex]=(itemperline[whichIndex]-4<0) ? 4 : itemperline[whichIndex]-lastrowlength;
+		}
+		
+        $('#'+whichParent+' .'+whichClass).not(':lt('+itemperline[whichIndex]+')').hide();
+		
+		if(itemperline[whichIndex]<=4){
+			$('#'+whichParent+' .dppbyzip .'+whichClass+'togglebtn .showmorelistbtn').show();
+			$('#'+whichParent+' .dppbyzip .'+whichClass+'togglebtn .showlesslistbtn').hide();
+		} else if((itemperline[whichIndex]<itemsize[whichIndex])&&(itemperline[whichIndex]-4>0)){
+			$('#'+whichParent+' .dppbyzip .'+whichClass+'togglebtn .showmorelistbtn').show();
+			$('#'+whichParent+' .dppbyzip .'+whichClass+'togglebtn .showlesslistbtn').show();
+		} 
+				
+		$('#dppResult .dppBoxes').matchHeight({ remove: true });
+		// apply matchHeight on the new selection, which includes the new element
+		$('#dppResult .dppBoxes').matchHeight();
+	}
+	
+	function checkMYGDPR(whichLoc){
+		
+	if(typeof whichLoc ==="undefined"){
+		whichLoc='';
+		
+	}
+		var myCountry = $('#cons_country'+whichLoc).val();
+		myCountry = myCountry.toLowerCase();
+
+	switch(myCountry){
+			case "austria":
+			case "belgium":
+			case "bulgaria":
+			case "croatia":
+			case "cyprus":
+			case "czech republic":
+			case "denmark":
+			case "estonia":
+			case "finland":
+			case "france":
+			case "germany":
+			case "greece":
+			case "hungary":
+			case "ireland":
+			case "italy":
+			case "latvia":
+			case "lithuania":
+			case "luxembourg":
+			case "malta":
+			case "netherlands":
+			case "poland":
+			case "portugal":
+			case "romania":
+			case "slovakia":
+			case "slovenia":
+			case "spain":
+			case "sweden":
+			case "united kingdom":
+				$('#myGDPRDiv'+whichLoc).show();
+				$('#myOptinDiv'+whichLoc).show();				
+				$('#myOptin'+whichLoc).prop('checked',false);
+				//$('#myGDPR'+whichLoc).prop('checked',false);				
+				isGDPR=1;
+				break;	
+			default:
+				$('#myGDPRDiv'+whichLoc).hide();
+				$('#myOptinDiv'+whichLoc).hide();				
+				$('#myOptin'+whichLoc).prop('checked',true);
+				$('#myGDPR'+whichLoc).prop('checked',false);				
+				isGDPR=0;
+		}
+	}
+	</script>
