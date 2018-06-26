@@ -1,0 +1,190 @@
+{
+	"configGeneral":{
+		"hintLabel": "Why does this matter?",
+		"nextBtnLabel": "Next Question",
+		"introText": "Our 60-Second Type 2 Diabetes Risk Test",
+		"submitBtns":{
+			"submitBtn0": "Email and View Your Results", 
+			"submitBtn1": "View Your Results"
+		}		
+	},
+	
+	"questionnaires":[
+		{
+			"qid": "1",
+			"question": "Are you taking this test for yourself, or for a loved one?",
+			"questionlayout":"1col",
+			"noscore":"y",			
+			"answers": {
+				"answerText0" : "For Myself",
+				"answerText1" : "For Someone Else"
+			}
+		},
+		{
+			"qid": "2",
+			"question": "How old are you?",
+			"questionlayout":"2col",
+			"paginatorImg":"../ws/risktest/img/qpaginator2.png",
+			"hintStatus": "y",
+			"hintDesc": "The older you are, the higher your risk for type 2 diabetes.",
+			"hintImage":"../ws/risktest/img/qicon2.png",
+			"noscore":"n",
+			"answers": {
+				"answerText0" : "Less than 40 years",
+				"answerText1" : "40-49 years",
+				"answerText2" : "50-59 years",
+				"answerText3" : "60 years or older"
+			}
+		},		
+		{
+			"qid": "3",
+			"question": "What is your gender?",	
+			"questionlayout":"2col",
+			"paginatorImg":"../ws/risktest/img/qpaginator3.png",
+			"hintStatus": "y",
+			"hintDesc": "Men are more likely than women to have undiagnosed diabetes; one reason may be that they are less likely to see their doctor regularly.",
+			"hintImage":"../ws/risktest/img/qicon3.png",
+			"noscore":"n",
+			"answers": {
+				"answerText0" : "Woman",
+				"answerText1" : "Man"				
+			},
+			"subQforA": "0",
+			"subquestion": "Have you ever been diagnosed with gestational diabetes?",
+			"subanswers":{
+				"answerText0": "No",
+				"answerText1": "Yes"
+			}
+		},		
+		{
+			"qid": "4",
+			"question": "Do you have a mother, father, sister or brother with diabetes?",
+			"questionlayout":"2col",
+			"paginatorImg":"../ws/risktest/img/qpaginator4.png",
+			"hintStatus": "y",
+			"hintDesc": "A family history of diabetes could contribute to your risk for type 2 diabetes.",
+			"hintImage":"../ws/risktest/img/qicon4.png",
+			"noscore":"n",
+			"answers": {
+				"answerText0" : "No",
+				"answerText1" : "Yes"
+			}
+		},		
+		{
+			"qid": "5",
+			"question": "Have you ever been diagnosed with high blood pressure?",
+			"questionlayout":"2col",
+			"paginatorImg":"../ws/risktest/img/qpaginator5.png",
+			"hintStatus": "y",
+			"hintDesc": "Having high blood pressure contributes to your overall risk for type 2 diabetes.",
+			"hintImage":"../ws/risktest/img/qicon5.png",
+			"noscore":"n",
+			"answers": {
+				"answerText0" : "No",
+				"answerText1" : "Yes"
+			}
+		},		
+		{
+			"qid": "6",
+			"question": "Are you physically active?",
+			"questionlayout":"2col",
+			"paginatorImg":"../ws/risktest/img/qpaginator6.png",
+			"hintStatus": "y",
+			"hintDesc": "Being inactive can increase your risk for type 2 diabetes.",
+			"hintImage":"../ws/risktest/img/qicon6.png",
+			"noscore":"n",
+			"answers": {
+				"answerText1" : "No",
+				"answerText0" : "Yes"
+			}
+		},
+		{
+			"qid": "7",
+			"question": "What race or ethnicity best describes you?",
+			"questionlayout":"2col",
+			"paginatorImg":"../ws/risktest/img/qpaginator7.png",
+			"hintStatus": "y",	
+			"hintDesc": "People of certain racial and ethnic groups are more likely to develop type 2 diabetes than others.",		
+			"hintImage":"../ws/risktest/img/qicon7.png",
+			"noscore":"y",
+			"answers": {
+				"answerText0" : "White",
+				"answerText1" : "Asian",
+				"answerText2" : "Hispanic and/or Latino",
+				"answerText3" : "American Indian or Alaska Native",
+				"answerText4" : "Black or African American",
+				"answerText5" : "Native Hawaiian or Other Pacific Islander",
+				"answerText6" : "Other",
+				"answerText7" : "Prefer Not To Say"
+			}
+		},
+		{
+			"qid": "8",
+			"question": "Tell us more about yourself.",
+			"questionlayout":"2col",
+			"paginatorImg":"../ws/risktest/img/qpaginator8.png",
+			"hintStatus": "y",
+			"hintDesc": "The combination of your weight and height lets us know your Body Mass Index or BMI. People with higher BMIs are at a higher risk.",
+			"hintImage":"../ws/risktest/img/qicon8.png",
+			"noscore":"n",
+			"answers": {
+				"answerText0" : "Height",
+				"answerText1" : "Weight||Weight",
+				"answerText2" : "4' 10\" (147cm)",
+				"answerText3" : "<119 lbs. (54kg);119-142 lbs. (54-64kg);143-190 lbs. (65-85kg);191+ lbs. (86kg)||<110 lbs. (50kg);110-142 lbs. (50-64kg);143-190 lbs. (65-85kg);191+ lbs. (86kg)",
+				"answerText4" : "4' 11\" (150cm)",
+				"answerText5" : "<124 lbs. (56kg);124-147 lbs. (56-66kg);148-197 lbs. (67-89kg);198+ lbs. (90kg)||<114 lbs. (52kg);114-147 lbs. (52-66kg);148-197 lbs. (67-89kg);198+ lbs. (90kg)",				
+				"answerText6" : "5' 0\" (152cm)",
+				"answerText7" : "<128 lbs. (58kg);128-152 lbs. (58-68kg);153-203 lbs. (69-91kg);204+ lbs. (92kg)||<118 lbs. (54kg);118-152 lbs. (54-68kg);153-203 lbs. (69-91kg);204+ lbs. (92kg)",				
+				"answerText8" : "5' 1\" (155cm)",
+				"answerText9" : "<132 lbs. (60kg);132-157 lbs. (60-71kg);158-210 lbs. (72-95kg);211+ lbs. (96kg)||<122 lbs. (55kg);122-157 lbs. (55-71kg);158-210 lbs. (72-95kg);211+ lbs. (96kg)",				
+				"answerText10" : "5' 2\" (157cm)",
+				"answerText11" : "<136 lbs. (62kg);136-163 lbs. (62-73kg);164-217 lbs. (74-98kg);218+ lbs. (99kg)||<126 lbs. (57kg);126-163 lbs. (57-73kg);164-217 lbs. (74-98kg);218+ lbs. (99kg)",
+				"answerText12" : "5' 3\" (160cm)",
+				"answerText13" : "<141 lbs. (64kg);141-168 lbs. (64-76kg);169-224 lbs. (77-101kg);225+ lbs. (102kg)||<130 lbs. (59kg);130-168 lbs. (59-76kg);169-224 lbs. (77-101kg);225+ lbs. (102kg)",
+				"answerText14" : "5' 4\" (163cm)",
+				"answerText15" : "<145 lbs. (66kg);145-173 lbs. (66-78kg);174-231 lbs. (79-104kg);232+ lbs. (105kg)||<134 lbs. (61kg);134-173 lbs. (61-78kg);174-231 lbs. (79-104kg);232+ lbs. (105kg)",
+				"answerText16" : "5' 5\" (165cm)",
+				"answerText17" : "<150 lbs. (68kg);150-179 lbs. (68-81kg);180-239 lbs. (82-108kg);240+ lbs. (109kg)||<138 lbs. (63kg);138-179 lbs. (63-81kg);180-239 lbs. (82-108kg);240+ lbs. (109kg)",
+				"answerText18" : "5' 6\" (168cm)",
+				"answerText19" : "<155 lbs. (70kg);155-185 lbs. (70-83kg);186-246 lbs. (84-111kg);247+ lbs. (112kg)||<142 lbs. (64kg);142-185 lbs. (64-83kg);186-246 lbs. (84-111kg);247+ lbs. (112kg)",
+				"answerText20" : "5' 7\" (170cm)",
+				"answerText21" : "<159 lbs. (72kg);159-190 lbs. (72-86kg);191-254 lbs. (87-115kg);255+ lbs. (116kg)||<146 lbs. (66kg);146-190 lbs. (66-86kg);191-254 lbs. (87-115kg);255+ lbs. (116kg)",
+				"answerText22" : "5' 8\" (173cm)",
+				"answerText23" : "<164 lbs. (74kg);164-196 lbs. (74-88kg);197-261 lbs. (89-118kg);262+ lbs. (119kg)||<151 lbs. (68kg);151-196 lbs. (68-88kg);197-261 lbs. (89-118kg);262+ lbs. (119kg)",
+				"answerText24" : "5' 9\" (175cm)",
+				"answerText25" : "<169 lbs. (77kg);169-202 lbs. (77-91kg);203-269 lbs. (92-121kg);270+ lbs. (122kg)||<155 lbs. (70kg);155-202 lbs. (70-91kg);203-269 lbs. (92-121kg);270+ lbs. (122kg)",
+				"answerText26" : "5' 10\" (178cm)",
+				"answerText27" : "<174 lbs. (79kg);174-208 lbs. (79-94kg);209-277 lbs. (95-125kg);278+ lbs. (126kg)||<160 lbs. (73kg);160-208 lbs. (73-94kg);209-277 lbs. (95-125kg);278+ lbs. (126kg)",
+				"answerText28" : "5' 11\" (180cm)",
+				"answerText29" : "<179 lbs. (81kg);179-214 lbs. (81-97kg);215-285 lbs. (98-129kg);286+ lbs. (130kg)||<165 lbs. (75kg);165-214 lbs. (75-97kg);215-285 lbs. (98-129kg);286+ lbs. (130kg)",
+				"answerText30" : "6' 0\" (183cm)",
+				"answerText31" : "<184 lbs. (83kg);184-220 lbs. (83-99kg);221-293 lbs. (100-132kg);294+ lbs. (133kg)||<169 lbs. (77kg);169-220 lbs. (77-99kg);221-293 lbs. (100-132kg);294+ lbs. (133kg)",
+				"answerText32" : "6' 1\" (185cm)",
+				"answerText33" : "<189 lbs. (86kg);189-226 lbs. (86-102kg);227-301 lbs. (103-136kg);302+ lbs. (137kg)||<174 lbs. (79kg);174-226 lbs. (79-102kg);227-301 lbs. (103-136kg);302+ lbs. (137kg)",
+				"answerText34" : "6' 2\" (188cm)",
+				"answerText35" : "<194 lbs. (88kg);194-232 lbs. (88-105kg);233-310 lbs. (106-140kg);311+ lbs. (141kg)||<179 lbs. (81kg);179-232 lbs. (81-105kg);233-310 lbs. (106-140kg);311+ lbs. (141kg)",
+				"answerText36" : "6' 3\" (191cm)",
+				"answerText37" : "<200 lbs. (91kg);200-239 lbs. (91-108kg);240-318 lbs. (109-144kg);319+ lbs. (145kg)||<184 lbs. (83kg);184-239 lbs. (83-108kg);240-318 lbs. (109-144kg);319+ lbs. (145kg)",
+				"answerText38" : "6' 4\" (193cm)",
+				"answerText39" : "<205 lbs. (93kg);205-245 lbs. (93-111kg);246-327 lbs. (112-148kg);328+ lbs. (149kg)||<189 lbs. (86kg);189-245 lbs. (86-111kg);246-327 lbs. (112-148kg);328+ lbs. (149kg)"
+			}
+		},
+		{
+			"qid": "9",
+			"question": "Would you like to hear more from us?",
+			"questionlayout":"2col",
+			"hintStatus": "n",			
+			"hintImage":"../ws/risktest/img/qicon9.png",
+			"noscore":"y",
+			"placeholders": {
+				"placeholder0" : "Email",
+				"placeholder1" : "ZIP Code",
+				"placeholder2" : "Yes! I want to receive information from the American Diabetes Association",
+				"placeholder3" : "Country",
+				"placeholder4" : "As a resident of countries affected by GDPR, we are required to request your consent and acknowledgement that you authorize us to store your data by checking this box."
+			}
+		}
+	
+	]
+}
