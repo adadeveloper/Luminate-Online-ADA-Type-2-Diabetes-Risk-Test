@@ -1,0 +1,57 @@
+<!--[if lte IE 9]>
+<div class="lt-ie9">
+<div class="alert alert-danger center-block" style="max-width:800px;min-width:280px;width:100%;">
+<strong>Your browser is outdated and no longer supported.</strong> You should <a href="http://browsehappy.com/" class="alert-link"><u>update your browser</u></a>.
+</div>
+</div>
+<![endif]-->
+
+<!--[if (gt IE 9)|!(IE)]><!-->
+[[S51:reus_GTM_Tag_dorg_body]]
+
+<!--header-->
+<div id="ADAHeader" class="ADACenter">
+
+<div class="row">
+<div class="col-md-9">
+<a href="http://diabetes.org/" target="_blank">
+<img src="../dorg/images/2013-template/ada-logo.png" alt="American Diabetes Association" border="0">
+</a>
+</div>
+<div class="col-md-3">&nbsp;</div>
+<div style="clear:both;height:1px;">&nbsp;</div>
+</div>
+</div>
+
+<div class="yellowSeparator">&nbsp;</div>
+
+<!--header-->
+
+<div id="ADAContent">
+[[S63:3]]
+</div>
+
+<div id="ADAFooter" class="ADACenter">
+
+<div class="row" style="max-width:1024px;margin:0 auto;">
+<div class="col-md-3 text-center"><a href="http://diabetes.org">American Diabetes Association</a></div>
+<div class="col-md-3 text-center"><span>2451 Crystal Dr., Suite 900</span></div>
+<div class="col-md-3 text-center"><span>Arlington, VA 22202</span></div>
+<div class="col-md-3 text-center"><span>1-800-DIABETES (800-342-2383)</span></div>
+<div style="clear:both;height:25px;">&nbsp;</div>
+</div>
+
+<div class="row">
+<div class="col-md-12 text-center"><p>Copyright 1995-2018. American Diabetes Association. All rights reserved. Use of this website constitutes acceptance of our <a href="http://diabetes.org/about-us/policies/terms-of-use.html" target="_blank">Terms of Use</a> and <a href="http://diabetes.org/about-us/policies/privacy-policy.html" target="_blank">Privacy Policy</a></p>
+<div style="clear:both;height:10px;">&nbsp;</div>
+</div>
+</div>
+
+</div>
+
+<script crossorigin src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script crossorigin src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+[[S51:COM_DORG_RiskTest_JS_DH]]
+
+<!--<![endif]-->
