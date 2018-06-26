@@ -1,0 +1,28 @@
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-M3V52N6"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+
+<!--[if lte IE 9]>
+<div class="lt-ie9">
+<div class="alert alert-danger center-block" style="max-width:800px;min-width:280px;width:100%;">
+<strong>Your browser is outdated and no longer supported.</strong> You should <a href="http://browsehappy.com/" class="alert-link"><u>update your browser</u></a>.
+</div>
+</div>
+<![endif]-->
+
+<!--[if (gt IE 9)|!(IE)]><!-->
+
+[[S63:3]]
+
+<script crossorigin src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script crossorigin src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<script src="../ws/js/jquery.matchHeight-min.js" type="text/javascript"></script>
+<script src="../ws/js/jquery.magnific-popup.min.js"></script>
+
+[[S51:Risk_Test_JS_DH]]
+
+<!--<![endif]-->
+
