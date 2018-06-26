@@ -1,0 +1,47 @@
+<!--<meta name="author" content="Daniel Hartanto" />-->
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="mobile-web-app-capable" content="yes" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+<!-- FACEBOOK -->
+<meta property="og:type" content="website" />
+	<meta property="og:url" content="https://donations.diabetes.org/site/SPageServer?pagename=Diabetes_Risk_Test&source=ada&cate=share&loca=fb" />
+	<meta property="og:title" content=" Take the Risk Test Today"/>
+	<meta property="og:description" content="Learn your risk for type 2 diabetes in one minute." />
+	<meta property="og:image" content="http://main.diabetes.org/ws/risktest/img/Risk_Test_Front_Screen_1200x630px.jpg" />
+	<meta property="og:image:secure_url" content="https://donations.diabetes.org/ws/risktest/img/Risk_Test_Front_Screen_1200x630px.jpg" />
+
+<!-- Social: Twitter -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:site" content="@AmDiabetesAssn" />
+<meta name="twitter:creator" content="@AmDiabetesAssn" />
+<meta name="twitter:title" content="Take the Risk Test Today" />
+<meta name="twitter:description" content="Learn your risk for type 2 diabetes in one minute." />
+<meta name="twitter:image:src" content="https://donations.diabetes.org/ws/risktest/img/Risk_Test_Front_Screen_1200x630px.jpg" />
+<meta name="twitter:url" content="https://donations.diabetes.org/site/SPageServer?pagename=Diabetes_Risk_Test&source=ada&cate=share&loca=twitter" />
+
+<!-- Social: Google+ / Schema.org  -->
+<meta itemprop="name" content="Take the Risk Test Today" />
+<meta itemprop="description" content="Learn your risk for type 2 diabetes in one minute." />
+<meta itemprop="image" content="https://donations.diabetes.org/ws/risktest/img/Risk_Test_Front_Screen_1200x630px.jpg" />
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" crossorigin="anonymous"> 
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" crossorigin="anonymous">
+<link href="//fonts.google.com/selection?selection.family=Roboto:400,900 " rel="stylesheet">
+<link rel="stylesheet" href="../ws/css/magnific-popup-min.css">
+
+
+
+[[S51:Risk_Test_CSS_DH]]
+
+
+
+<!-- Google Tag Manager -->
+<!--<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-M3V52N6');</script>-->
+<!-- End Google Tag Manager -->
