@@ -1,0 +1,44 @@
+<link href="../ws/risktest/css/risktestv2.min.css" rel="stylesheet">
+
+<style>
+
+[[?xxxx::xx[[S334:vmode]]xx::::
+
+#RTscorearea, #root{display:none;}
+#resultbox, #relatedinfo, #adahotline{display:block;}
+
+[[?xxndxx::xx[[S334:vmode]]xx::
+#highcontent1 {display:block !important;}
+#dppsearchbox{display:none;}
+#dppResult{display:none;}
+#erpsearchbox{display:block;}
+#rdnav{display:block;}
+#dppnav{display:none;}
+#recentlydiagnosed{display:block;}
+#dpprogram{display:none;}
+::]]
+
+[[?xxlyrxx::xx[[S334:vmode]]xx::
+#highcontent1 {display:block !important;}
+#dppsearchbox{display:block;}
+#erpsearchbox{display:none;}
+#erpResult{display:none;}
+#rdnav{display:none;}
+#dppnav{display:block;}
+#recentlydiagnosed{display:none;}
+#dpprogram{display:block;}
+::]]
+
+]]
+
+div#type2radiobox, div #prediabetesradiobox {font-size: 14pt;}
+
+/*TEMPORARY*/
+
+#dppiptop, #dpponlinetop, .onlinestripes, .ipstripes{background-color:#8b8d8e !important;background-image:none !important;}
+
+#dppfeattop, .dppfeat, .fa-star {
+    display: none;
+}
+
+</style>
