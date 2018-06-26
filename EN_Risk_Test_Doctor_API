@@ -1,0 +1,189 @@
+<div class="row" style="box-shadow:2px 2px #CCC;border-radius:12px;border:#C8C8C8 solid 1px;background-color:#FFF;">
+
+<div class="col-md-9 equalheight" style="min-height:620px;">
+<div style="padding:12px;font-size:15pt;">
+<div style="clear:both;height:15px;">&nbsp;</div>
+
+<p class="bolder" style="font-size:22pt;font-weight:700;">What Should I Do Now?</p>
+<div style="clear:both;height:10px;">&nbsp;</div>
+<p id="introseedoctor">You may feel like you don&#8217;t know where to begin. It&#8217;s important to consult your doctor before taking any next step. If you find out you have prediabetes, we recommend that you join a CDC-recognized diabetes prevention program. The lifestyle change program can help you prevent or delay type 2 diabetes. If you&#8217;ve been diagnosed with type 2 diabetes, we encourage you to find a diabetes educator that will provide the ongoing support you need to develop a plan to manage your diabetes.</p>
+<div id="type2radiobox" class="type2related doctorrelated">
+<input type="radio" name="seedoctor" value="type2" onClick="showOption('type2');"> I have been diagnosed with type 2 diabetes. 
+	</div>
+<div style="clear:both;height:10px;">&nbsp;</div>
+<div id="prediabetesradiobox" class="prediabetesrelated doctorrelated">
+<input type="radio" name="seedoctor" value="prediabetes" onClick="showOption('prediabetes');"> I have seen a doctor and have been told I have prediabetes.
+	</div>
+<div style="clear:both;height:10px;">&nbsp;</div>
+
+<div id="prediabetesdoctormsg" class="inithide prediabetesrelated doctorrelated">
+<p>You may feel like you don&#8217;t know where to begin. Fortunately, studies show that a diabetes prevention program can help you lose weight, reduce your risk for diabetes, and improve your overall well-being. Find a program near you today.</p>
+
+<!-- SHOWDPPBYSTATES -->
+<div class="row" style="display:none;">
+<div class="col-md-9 text-center" style="vertical-align:top;padding:10px;background-color:#000;">
+<p style="margin-top:5px;color:#FFF;"><strong>Find a National Diabetes Prevention Program in Your State</strong></p>
+</div>
+
+
+<div class="col-md-3" style="vertical-align:top;">
+<select id="dppStates" onChange="showDPPbyState();" >
+                        <option value="">Select State</option>
+                        <option value="AK">AK</option>
+                        <option value="AL">AL</option>
+                        <option value="AR">AR</option>
+                        <option value="AZ">AZ</option>
+                        <option value="CA">CA</option>
+                        <option value="CO">CO</option>
+                        <option value="CT">CT</option>
+                        <option value="DC">DC</option>
+                        <option value="DE">DE</option>
+                        <option value="FL">FL</option>
+                        <option value="GA">GA</option>
+                        <option value="HI">HI</option>
+                        <option value="IA">IA</option>
+                        <option value="ID">ID</option>
+                        <option value="IL">IL</option>
+                        <option value="IN">IN</option>
+                        <option value="KS">KS</option>
+                        <option value="KY">KY</option>
+                        <option value="LA">LA</option>
+                        <option value="MA">MA</option>
+                        <option value="MD">MD</option>
+                        <option value="ME">ME</option>
+                        <option value="MI">MI</option>
+                        <option value="MN">MN</option>
+                        <option value="MO">MO</option>
+                        <option value="MS">MS</option>
+                        <option value="MT">MT</option>
+                        <option value="NC">NC</option>
+                        <option value="ND">ND</option>
+                        <option value="NE">NE</option>
+                        <option value="NH">NH</option>
+                        <option value="NJ">NJ</option>
+                        <option value="NM">NM</option>
+                        <option value="NV">NV</option>
+                        <option value="NY">NY</option>
+                        <option value="OH">OH</option>
+                        <option value="OK">OK</option>
+                        <option value="OR">OR</option>
+                        <option value="PA">PA</option>
+                        <option value="RI">RI</option>
+                        <option value="SC">SC</option>
+                        <option value="SD">SD</option>
+                        <option value="TN">TN</option>
+                        <option value="TX">TX</option>
+                        <option value="UT">UT</option>
+                        <option value="VA">VA</option>
+                        <option value="VT">VT</option>
+                        <option value="WA">WA</option>
+                        <option value="WI">WI</option>
+                        <option value="WV">WV</option>
+                        <option value="WY">WY</option>
+                        <!--<option value="AS">AS</option>
+                        <option value="FM">FM</option>
+                        <option value="GU">GU</option>
+                        <option value="MH">MH</option>
+                        <option value="MP">MP</option>
+                        <option value="PR">PR</option>
+                        <option value="PW">PW</option>
+                        <option value="VI">VI</option>
+                        <option value="AA">AA</option>
+                        <option value="AE">AE</option>
+                        <option value="AP">AP</option>
+                        <option value="AB">AB</option>
+                        <option value="BC">BC</option>
+                        <option value="MB">MB</option>
+                        <option value="NB">NB</option>
+                        <option value="NL">NL</option>
+                        <option value="NS">NS</option>
+                        <option value="NT">NT</option>
+                        <option value="NU">NU</option>
+                        <option value="ON">ON</option>
+                        <option value="PE">PE</option>
+                        <option value="QC">QC</option>
+                        <option value="SK">SK</option>
+                        <option value="YT">YT</option>-->                      
+                    </select>
+</div>
+<div style="clear:both;height:1px;">&nbsp;</div>
+</div>
+<!-- SHOWDPPBYSTATE -->
+
+<div class="text-right"><p style="margin-top:20px"><a onclick="resetSelection();">Back to main option</a></p></div>
+
+</div>
+
+<div id="type2doctormsg" class="inithide type2related doctorrelated">
+<p>Managing diabetes can be a challenge and can seem overwhelming. Having a diabetes educator can make managing your diabetes easier. They work with you to develop a plan to stay healthy, and give you the tools and ongoing support you need to make that plan a regular part of your life.</p>
+
+
+<div class="text-right"><p style="margin-top:20px"><a onclick="resetSelection();">Back to main option</a></p></div>
+</div>
+
+
+<!-- OUTSIDE DPP -->
+<div id="dppsearchbox" class="row">
+<div style="clear:both;height:15px;">&nbsp;</div>
+	<div class="col-md-12 text-center" style="vertical-align:top;padding:5px;background-color:#000;">
+	<p style="margin-top:5px;color:#FFF;"><strong>Find a National Diabetes Prevention Program Near You</strong></p>
+	</div>
+<div style="clear:both;height:10px;">&nbsp;</div>
+	<div class="col-me-12 text-center">
+	<select id="dppMiles" style="width:200px;margin:10px;">
+            <option value="">Select Miles</option>
+            <option value="10">10 Miles</option>
+			<option value="15">15 Miles</option>
+			<option value="20">20 Miles</option>
+			<option value="25">25 Miles</option>
+	</select>
+	<span>from</span>
+	<input type="text" id="myDPPZip" placeholder="ZIP Code" style="padding:12px;height:60px;margin:10px;" maxlength="5" />
+	<a id="findDPPbtn" class="bluebtn" style="display:inline-block;zoom:1;*display:block;padding-top:15px;text-align:center;" onClick="findDPP()">Find</a>
+<div style="clear:both;height:10px;">&nbsp;</div>
+	<div class="alert alert-danger inithide" id="dppvalidatemsg">Please select your ZIP Code and desired miles distance.</div>
+	</div> 
+	<div style="clear:both;height:1px;">&nbsp;</div>
+</div>
+
+<!-- OUTSIDE DPP -->
+
+<!-- OUTSIDE ERP -->
+<div id="erpsearchbox" class="row inithide">
+<div style="clear:both;height:15px;">&nbsp;</div>
+<div class="col-md-12 text-center" style="vertical-align:top;background-color:#000;">
+<p style="margin-top:5px;color:#FFF;"><strong>Search Recognized Education Program near You</strong></p>
+</div>
+<div style="clear:both;height:10px;">&nbsp;</div>
+<div class="col-me-12 text-center">
+	<select id="erpMiles" style="width:200px;margin:10px;">
+                        <option value="">Select Miles</option>
+                        <option value="10">10 Miles</option>
+<option value="15">15 Miles</option>
+<option value="20">20 Miles</option>
+<option value="25">25 Miles</option>
+	</select>
+	<span>from</span>
+	<input type="text" id="myERPZip" placeholder="ZIP Code" style="padding:12px;height:60px;margin:10px;" maxlength="5" />
+	<a id="findERPbtn" class="bluebtn" style="display:inline-block;zoom:1;*display:block;padding-top:15px;text-align:center;" onClick="findERP()">Find</a>
+<div style="clear:both;height:10px;">&nbsp;</div>
+	<div class="alert alert-danger inithide" id="erpvalidatemsg">Please select your ZIP Code and desired miles distance.</div>
+</div> 
+<div style="clear:both;height:1px;">&nbsp;</div>
+</div>
+
+<!-- OUTSIDE ERP -->
+
+<div style="clear:both;height:15px;">&nbsp;</div>
+</div>
+</div>
+
+<div class="col-md-3 hidden-xs hidden-sm text-right equalheight" style="min-height:620px;padding:0;"><img src="../ws/risktest/img/relatedinfos/Risk_Test_See_Doctor_230x320px.jpg" class="sideImgRRBoxes" style="max-width:288px;border-bottom-right-radius:12px;height:100%;" alt="See a Doctor" /></div>
+</div>
+
+
+<!--<div id="dppResult" class="prediabetesrelated doctorrelated inithide text-center"></div>-->
+<div id="dppResult" class="text-center"></div>
+<div id="erpResult" class="text-center"></div>
+
+
