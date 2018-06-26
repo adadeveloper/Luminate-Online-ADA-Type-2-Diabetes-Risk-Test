@@ -310,4 +310,13 @@ div#type2radiobox, div #prediabetesradiobox {
 
 /*#myOptin,#myOptin2{display:none;}*/
 
+/*TEMPORARY*/
+
+#dppiptop, #dpponlinetop, .onlinestripes, .ipstripes{background-color:#8b8d8e !important;background-image:none !important;}
+
+#dppfeattop, .dppfeat, .fa-star {
+    display: none;
+}
+
+
 </style>
