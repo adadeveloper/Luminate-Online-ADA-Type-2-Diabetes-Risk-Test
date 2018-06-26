@@ -1,0 +1,68 @@
+<div style="clear:both;height:15px;">&nbsp;</div>
+
+<div id="ADALogo">
+	<a href="http://diabetes.org/" target="_blank">
+	<img src="../dorg/images/2013-template/ada-logo.png" alt="American Diabetes Association" border="0">
+	</a>
+</div>
+
+<div id="root"></div>
+
+
+<!-- Result Box-->
+<div id="resultbox">
+	<!-- REUSABLE CALL -->
+[[?xxxx::xx[[S334:lang]]xx::
+          [[S51:EN_RiskTest_Score]]
+::
+	[[E51:[[S334:lang]]_RiskTest_Score]]
+]]
+</div><!-- result box -->
+
+
+<div id="relatedinfo">
+	<div id="relatedinfocontent">
+[[?xxxx::xx[[S334:lang]]xx::
+          [[S51:EN_RiskTest_RelatedInfo]]
+::
+	[[E51:[[S334:lang]]_RiskTest_RelatedInfo]]	
+]]
+	</div>
+</div>
+
+<div id="emailResult" class="inithide">
+<div id="emailResultcontent">
+[[?xxxx::xx[[S334:lang]]xx::
+      [[S51:EN_RiskTest_Signup]]
+::
+      [[E51:[[S334:lang]]_RiskTest_Signup]]
+]]
+</div>
+</div>
+
+<div id="adahotline" class="inithide">
+<div id="adahotlinecontent">
+[[?xxxx::xx[[S334:lang]]xx::
+      [[S51:EN_RiskTest_Hotline]]
+::
+      [[E51:[[S334:lang]]_RiskTest_Hotline]]
+]]
+</div>
+</div>
+
+<div style="clear:both;height:25px;">&nbsp;</div>
+
+
+<script src="../ws/js/iframeresizer/iframeResizer355.contentWindow.min.js" type="text/javascript"></script>
+
+
+
+<!-- MARKETO -->
+<script src="//app-ab24.marketo.com/js/forms2/js/forms2.min.js"></script>
+<form id="mktoForm_1038" style="display:none;"></form>
+<!--<form id="mktoForm_1005" style="display:none;"></form>-->
+
+
+
+	
+
