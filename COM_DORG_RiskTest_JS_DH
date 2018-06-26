@@ -1,0 +1,50 @@
+<script type="text/javascript">
+
+if(getURLParameter('lang')!='null'){
+var setLang ='&lang='+getURLParameter('lang');
+} else {
+var setLang = '&lang=EN';
+}
+
+if(getURLParameter('source')!='null'){
+var setSource ='&source='+getURLParameter('source');
+} else {
+var setSource = '&source=dorg';
+}
+
+if(getURLParameter('cate')!='null'){
+var setCat ='&cate='+getURLParameter('cate');
+} else {
+var setCat = '&cate=unknown';
+}
+
+[[?xxxx::xx[[S334:loca]]xx::::
+var setLoc = '&loca=[[S334:loca]]';
+]]
+
+[[?xxxx::xx[[S334:vmode]]xx::::
+var setVMode='&vmode=[[S334:vmode]]';
+]]
+
+if(getURLParameter('devmode')!='null'){
+var devmodeval = getURLParameter('devmode');
+var defaultURL = "SPageServer?pagename=Risk_Test"+setLang+setSource+setCat+[[?xxxx::xx[[S334:loca]]xx::::setLoc+]]"&devmode="+devmodeval;
+} else {
+var defaultURL = "SPageServer?pagename=Risk_Test"+setLang+setSource+setCat[[?xxxx::xx[[S334:loca]]xx::::+setLoc]][[?xxxx::xx[[S334:vmode]]xx::::+setVMode]];
+}
+
+
+
+
+
+$(document).ready(function(){
+$('#my_iframe').prop('src',defaultURL);
+});
+
+function getURLParameter(name) {
+return decodeURI( (RegExp(name + '=' + '(.+?)(&|$)').exec(location.search) || [, null])[1]);
+}
+
+
+
+</script>
