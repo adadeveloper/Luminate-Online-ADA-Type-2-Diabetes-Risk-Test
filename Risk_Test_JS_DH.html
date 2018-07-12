@@ -63,9 +63,9 @@ var erpapiurl = 'https://professional.diabetes.org/rendpoint/erp_listing.json';
 //var erpapiurl='https://adastg-180201.srv2.civi-go.net/rendpoint/erp_listing.json';
 	
 
-	//var atok='https://d-techlab.net/utils/rtapi2.php';
-	//var atokJSON;
-	//var atokval;
+	var atok='https://risktest-api.diabetes.org/rtapi.php';
+	var atokJSON;
+	var atokval;
 	
 	
 	var isGDPR=0;
@@ -99,9 +99,9 @@ var erpapiurl = 'https://professional.diabetes.org/rendpoint/erp_listing.json';
 			whatSource = whatSource.toLowerCase();
 		}
 		
-		/*atokJSON = $.getJSON(atok, function(data){
+		atokJSON = $.getJSON(atok, function(data){
 			atokval = data.access_token;
-		});*/
+		});
 
 		jqxhr = $.getJSON('../ws/risktest/'+whatLang+'.json?nocache='+(new Date()).getTime(), function(data){
 			//console.log('success');
@@ -624,7 +624,7 @@ var isLow='yes'
 						  "emailaddress": myEmail,
 						  "lang": whatLang,						  
 						  "testfor": answerValArr[0],
-						  //"access_token":atokval,
+						  "access_token":atokval,
 						  "GDPR_Consent":mygdprconsent,
 						  "country":myGDPRCountry,
 						  "category": whatCat
@@ -668,7 +668,7 @@ var isLow='yes'
 						  "lang": whatLang,						  
 						  "testfor": answerValArr[0],
 						  "location": whatLoc,
-						  //"access_token":atokval,
+						  "access_token":atokval,
 						  "GDPR_Consent":mygdprconsent,
 						  "country":myGDPRCountry,
 						  "category": whatCat
@@ -832,7 +832,7 @@ var isLow2 = 'yes';
 							  "emailaddress": $('#myemail2').val(),
 							  "zip": $('#myzip2').val(),
 							  "optin": mycurroptinnum2,
-							  //"access_token":atokval,
+							  "access_token":atokval,
 							  "GDPR_Consent":mygdprconsent2,
 							  "country": myGDPRCountry2
 							  
@@ -1850,7 +1850,7 @@ function findDPP(){
 					data       : {						  
 						  "transform": true,
 						  "order[0]":"name", 
-						  //"access_token":atokval,
+						  "access_token":atokval,
 						  "filter[0]":"groupfeatured,EQ,1"						  
 					},
 					dataType   : 'json',    
@@ -1918,8 +1918,9 @@ function findDPP(){
 						complete   : function() {},
 						data       : {						  
 							  "transform": true,
-							  //"access_token":atokval,
-							  "order[0]":"distancezip:"+$('#myDPPZip').val(),							  
+							  "access_token":atokval,
+							  "order[0]":"featured,desc",
+							  "order[1]":"distancezip:"+$('#myDPPZip').val(),							  
 							  "filter[0]":"groupinperson,EQ,1",						 "filter[1]":"distancezip:"+$('#myDPPZip').val()+",le,"+$('#dppMiles').val()
 						},
 						dataType   : 'json',    
@@ -1999,8 +2000,9 @@ function findDPP(){
 							complete   : function() {},
 							data       : {						  
 								  "transform": true,
-								  //"access_token":atokval,
-								  "order[0]":"name", 
+								  "access_token":atokval,
+								  "order[0]":"featured,desc",
+								  "order[1]":"name", 
 								  "filter[0]":"grouponline,EQ,1"						 
 							},
 							dataType   : 'json',    
